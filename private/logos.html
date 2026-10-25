@@ -1,0 +1,122 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Logo Library | Northfield Enterprise</title><style>
+:root{--navy:#11345D;--navy-deep:#0C2645;--navy-ink:#081B33;--ink:#1C2533;--slate:#586579;--mist:#DCE3EC;--paper:#F5F7F9;--frost:#B9C8DA;--green:#177245;--red:#A82114;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;--sans:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color-scheme:light}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--navy);outline-offset:3px;border-radius:6px}
+.hide{display:none!important}
+.app{display:grid;grid-template-columns:264px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;background:var(--navy-deep);color:#D6E0EC;display:flex;flex-direction:column;padding:26px 18px 20px;overflow-y:auto}
+.side-logo{display:block;padding:0 10px 26px;margin-bottom:14px;border-bottom:1px solid rgba(185,200,218,.16)}
+.side-logo img{width:160px;height:auto;display:block}
+.side-nav{display:flex;flex-direction:column;gap:4px}
+.side-nav a{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;color:#D6E0EC;text-decoration:none;font:500 14.5px var(--sans)}
+.side-nav a svg{flex:none;opacity:.85}
+.side-nav a:hover{background:rgba(255,255,255,.06);color:#fff}
+.side-nav a.on{background:rgba(255,255,255,.1);color:#fff;font-weight:600}
+.side-nav .sep{height:1px;background:rgba(185,200,218,.16);margin:12px 4px}
+.side-nav .ext{margin-left:auto;opacity:.6}
+.side-foot{margin-top:auto;padding-top:18px;display:grid;gap:8px}
+.side-foot a{display:flex;align-items:center;gap:8px;font:500 13.5px var(--sans);color:var(--frost);text-decoration:none;padding:10px 12px;border-radius:12px;transition:color .2s,background .2s}
+.side-foot a:hover{background:rgba(255,255,255,.06)}
+.side-foot a:hover{color:#fff}
+.side-foot button{display:flex;align-items:center;justify-content:center;gap:8px;min-height:42px;border-radius:12px;border:1px solid rgba(185,200,218,.3);background:transparent;color:#fff;font:600 14px var(--sans);cursor:pointer}
+.side-foot button:hover{background:rgba(255,255,255,.06)}
+.mtop{display:none}
+.content{padding:clamp(28px,4vw,48px) clamp(20px,4vw,56px) 64px;max-width:1240px;width:100%}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;padding-bottom:22px;border-bottom:1px solid var(--mist)}
+.head h1{margin:0 0 4px;font:500 clamp(30px,3.4vw,38px)/1.1 var(--serif);color:var(--navy)}
+.head p{margin:0;font-size:15px;color:var(--slate)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:38px;border:1px solid rgba(17,52,93,.22);border-radius:999px;padding:0 15px;background:#fff;color:var(--navy);font:600 13.5px var(--sans);cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--navy);background:#F0F4F8}
+.btn.accept{background:var(--green);border-color:var(--green);color:#fff}
+.btn.accept:hover{background:#125c37}
+.btn.decline{color:var(--red);border-color:rgba(168,33,20,.3)}
+.btn.decline:hover{background:#FBF1F0}
+.btn[disabled]{opacity:.6;cursor:default}
+.status{font-size:14px;color:var(--slate);min-height:20px;margin:16px 0 0}
+.status:empty{display:none}
+.meta{font-size:13.5px;color:var(--slate);margin:4px 0 0}
+/* logo library */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:24px}
+.logo{display:flex;flex-direction:column;background:#fff;border:1px solid var(--mist);border-radius:16px;overflow:hidden}
+.preview{height:170px;display:grid;place-items:center;padding:18px;background:linear-gradient(45deg,#F1F4F8 25%,transparent 25%,transparent 75%,#F1F4F8 75%),linear-gradient(45deg,#F1F4F8 25%,#fff 25%,#fff 75%,#F1F4F8 75%);background-size:20px 20px;background-position:0 0,10px 10px;border-bottom:1px solid var(--mist)}
+.preview img{max-width:100%;max-height:100%;object-fit:contain}
+.name{font:600 15px var(--sans);color:var(--ink);padding:14px 16px 0}
+.small{font-size:12px;color:var(--slate);padding:3px 16px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.logo .actions{display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px 16px}
+.plus{min-height:262px;border:1.5px dashed #A9B6C6;border-radius:16px;background:#fff;color:var(--navy);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font:300 44px/1 var(--sans)}
+.plus::after{content:"Add logo";font:600 14px var(--sans)}
+.plus:hover{border-color:var(--navy);background:#F7F9FB}
+/* access requests */
+.list{display:grid;gap:12px;margin-top:24px}
+.req{background:#fff;border:1px solid var(--mist);border-radius:16px;padding:20px 22px}
+.req b{font:500 20px var(--serif);color:var(--ink)}
+.reason{margin:12px 0 16px;padding:12px 14px;background:var(--paper);border-radius:10px;font-size:15px;line-height:1.55;color:#2A3342}
+.req .actions{display:flex;gap:8px;flex-wrap:wrap}
+.list .empty{margin-top:0}
+.empty{margin-top:24px;padding:48px 24px;text-align:center;color:var(--slate);font-size:15px;background:#fff;border:1px dashed #C3CEDB;border-radius:16px}
+.scrim2{display:none}
+@media (max-width:860px){
+  .app{grid-template-columns:1fr}
+  .side{position:fixed;z-index:50;left:0;top:0;bottom:0;width:min(300px,86vw);height:auto;transform:translateX(-100%);visibility:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s .3s}
+  .side.open{transform:none;visibility:visible;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+  .scrim2{display:block;position:fixed;inset:0;z-index:40;background:rgba(8,27,51,.45);opacity:0;pointer-events:none;transition:opacity .25s}
+  .scrim2.on{opacity:1;pointer-events:auto}
+  .mtop{display:flex;position:sticky;top:0;z-index:30;align-items:center;justify-content:space-between;height:62px;padding:0 16px;background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--mist)}
+  .mtop img{height:20px;width:auto}
+  .mtop button{width:42px;height:42px;border-radius:999px;border:1px solid rgba(17,52,93,.18);background:#fff;display:grid;place-content:center;gap:5px;cursor:pointer;padding:0}
+  .mtop button span{display:block;width:18px;height:2px;border-radius:2px;background:var(--navy)}
+}
+@media (max-width:860px){
+  .content{padding:26px 16px 56px}
+  .head{flex-direction:column;align-items:center;text-align:center;gap:12px}
+  .head .btn{align-self:center}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+  .preview{height:130px}
+  .plus{min-height:200px}
+  .req{padding:18px}
+  .status{text-align:center}
+}
+</style></head><body>
+<div class="app">
+<aside class="side" id="side" aria-label="Team navigation">
+  <a class="side-logo" href="/private/portal.html"><img src="/assets/northfield-enterprise-logo-white.png" alt="Northfield Enterprise" width="1032" height="371"></a>
+  <nav class="side-nav">
+    <a href="/private/portal.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Team Portal</a>
+    <a href="/private/logos.html" class="on" aria-current="page"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Logo Library</a>
+    <a href="/private/admin.html" id="admin" class=" hide"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M19 8v6M16 11h6"/></svg>Access Requests</a>
+    <div class="sep"></div>
+    <a href="https://northfieldmills.com/portal" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg>Northfield Mills Team Portal<svg class="ext" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+  </nav>
+  <div class="side-foot">
+    <a class="back-site" href="/"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Back to Northfield Enterprise website</a>
+    <button id="logout" type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4M10 17l5-5-5-5M15 12H4"/></svg>Sign Out</button>
+  </div>
+</aside>
+<div class="scrim2" id="scrim2"></div>
+<div>
+  <header class="mtop"><img src="/assets/ne-monogram-navy.png" alt="Northfield Enterprise" width="424" height="244"><button type="button" id="sideBtn" aria-label="Open menu" aria-controls="side" aria-expanded="false"><span></span><span></span><span></span></button></header>
+  <main class="content">
+    <div class="head"><div><h1>Logo Library</h1><p>Private team asset library.</p></div></div>
+    <div id="status" class="status">Loading…</div>
+    <div id="grid" class="grid"></div>
+    <input id="file" type="file" accept="image/*" hidden>
+  </main>
+</div>
+</div>
+<script data-keep>
+(function(){var b=document.getElementById('sideBtn'),d=document.getElementById('side'),s=document.getElementById('scrim2');
+function set(o){d.classList.toggle('open',o);s.classList.toggle('on',o);b.setAttribute('aria-expanded',o)}
+b.onclick=function(){set(true)};s.onclick=function(){set(false)};document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});})();
+</script>
+<script type="module">
+import {getUser,logout} from 'https://cdn.jsdelivr.net/npm/@netlify/identity@2.0.0/+esm';const q=s=>document.querySelector(s);let user=await getUser();if(!user)location.replace('/login.html');const roles=user?.roles||user?.appMetadata?.roles||[];const admin=roles.includes('logo-admin');if(admin)q('#admin').classList.remove('hide');q('#logout').onclick=async()=>{await logout();location.replace('/login.html')};
+const built=[{name:'Northfield Enterprise 180',url:'/logo-library/northfield-enterprise-180.png',builtIn:true},{name:'Northfield Enterprise 192',url:'/logo-library/northfield-enterprise-192.png',builtIn:true},{name:'Northfield Enterprise 512',url:'/logo-library/northfield-enterprise-512.png',builtIn:true}];function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}function card(x){return `<div class="logo"><div class="preview"><img src="${x.url}" alt=""></div><div class="name">${esc(x.name)}</div><div class="small">${location.origin+x.url}</div><div class="actions"><button class="btn" data-copy="${x.url}">Copy Link</button>${admin&&!x.builtIn?`<button class="btn" data-del="${x.id}">Delete</button>`:''}</div></div>`}async function load(){try{const r=await fetch('/.netlify/functions/logos-list');if(!r.ok)throw Error(await r.text());const custom=await r.json();q('#grid').innerHTML=[...built,...custom].map(card).join('')+(admin?'<button class="plus" id="plus" aria-label="Add logo">+</button>':'');q('#status').textContent='';q('#grid').querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>navigator.clipboard.writeText(location.origin+b.dataset.copy));q('#grid').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>del(b.dataset.del));if(admin)q('#plus').onclick=()=>q('#file').click()}catch(e){q('#status').textContent='Could not load logo library: '+e.message}}async function del(id){if(!confirm('Delete this logo?'))return;const r=await fetch('/.netlify/functions/logo-delete',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({id})});if(!r.ok)alert(await r.text());else load()}q('#file').onchange=async()=>{const f=q('#file').files[0];if(!f)return;if(f.size>4*1024*1024){alert('Image must be 4 MB or smaller.');return}const name=prompt('Logo name',f.name)||f.name;const data=await new Promise((res,rej)=>{const rd=new FileReader();rd.onload=()=>res(rd.result);rd.onerror=rej;rd.readAsDataURL(f)});q('#status').textContent='Uploading…';const r=await fetch('/.netlify/functions/logo-upload',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name,type:f.type||'image/png',data})});if(!r.ok)alert(await r.text());q('#file').value='';load()};load();
+</script>
+<script src="/assets/pw-toggle.js" defer></script>
+</body></html>

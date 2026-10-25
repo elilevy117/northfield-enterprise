@@ -1,0 +1,1 @@
+import { getStore } from '@netlify/blobs'; import { requireUser } from './_guard.mjs'; export default async()=>{const g=await requireUser(false);if(g.error)return g.error;let items=[];try{items=await getStore('northfield-logos').get('index',{type:'json'})||[]}catch{}return Response.json(items,{headers:{'cache-control':'no-store'}})};

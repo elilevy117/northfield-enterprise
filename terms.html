@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#11345D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Terms & Conditions | Northfield Enterprise</title>
+<style>
+:root{
+  --navy:#11345D;          /* brand navy (unchanged) */
+  --navy-deep:#0C2645;     /* foundation band */
+  --navy-ink:#081B33;      /* footer */
+  --ink:#1C2533;
+  --slate:#586579;
+  --mist:#DCE3EC;
+  --paper:#F5F7F9;
+  --frost:#B9C8DA;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:100px}
+@view-transition{navigation:auto}
+body{animation:pagein .45s ease both}
+@keyframes pagein{from{opacity:0}to{opacity:1}}
+html.leaving body{opacity:0;transition:opacity .18s ease}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
+body>main{flex:1 0 auto}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--navy)}
+:focus-visible{outline:2px solid var(--navy);outline-offset:3px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+
+/* floating top bar + menu drawer (all public pages)
+   One light class switch (.scrolled) with CSS transitions: the browser animates it, so scrolling itself stays free and fast. */
+:root{--bar-h:66px;--bar-top:16px;--bar-h1:56px;--bar-top1:10px;--mono0:34px;--logo1:40px;--ease:cubic-bezier(.22,.8,.24,1)}
+@media (max-width:860px){:root{--bar-h:58px;--bar-top:12px;--bar-h1:52px;--bar-top1:8px;--mono0:30px;--logo1:36px}}
+body.with-bar{padding-top:calc(var(--bar-top) + var(--bar-h) + 36px)}
+.topbar{position:fixed;z-index:30;top:var(--bar-top);left:50%;transform:translateX(-50%);
+  width:min(1168px,calc(100% - 32px));height:var(--bar-h);display:flex;align-items:center;gap:20px;padding:0 8px 0 26px;border-radius:999px;
+  background:rgba(255,255,255,.86);border:1px solid rgba(17,52,93,.1);
+  -webkit-backdrop-filter:blur(14px) saturate(1.15);backdrop-filter:blur(14px) saturate(1.15);
+  box-shadow:0 8px 28px rgba(8,27,51,.08);
+  transition:height .5s var(--ease),top .5s var(--ease),background-color .5s ease,border-color .5s ease,box-shadow .5s ease}
+.topbar.scrolled{height:var(--bar-h1);top:var(--bar-top1);background:rgba(255,255,255,.96);box-shadow:0 12px 34px rgba(8,27,51,.14)}
+.topbar::before{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;opacity:0;
+  background:rgba(12,38,69,.42);border:1px solid rgba(185,200,218,.22);transition:opacity .5s ease}
+/* NE monogram at the top, full wordmark once scrolled (cross-fade + width ease so the links glide, never jump) */
+.brandmark{position:relative;display:grid;align-items:center;justify-items:start;align-self:stretch;flex:none;text-decoration:none;line-height:0;
+  width:calc(var(--mono0) * 1.738);margin-right:30px;transition:width .5s var(--ease),margin-right .5s var(--ease)}
+.topbar.scrolled .brandmark{width:calc(var(--logo1) * 2.782);margin-right:8px}
+.brandmark img{grid-area:1/1;width:auto;transition:opacity .45s ease,transform .5s var(--ease)}
+.brandmark .mono{height:var(--mono0)}
+.brandmark .word{height:var(--logo1);opacity:0;transform:scale(.92);transform-origin:left center}
+.brandmark .m-lt{opacity:0}
+.topbar.scrolled .brandmark .mono{opacity:0!important;transform:scale(.9)}
+.topbar.scrolled .brandmark .word{opacity:1;transform:none}
+.brandmark:hover img{filter:brightness(1.08)}
+.links{position:relative;display:flex;gap:clamp(18px,2.6vw,34px);margin:0 auto;padding:0;list-style:none}
+.links a{position:relative;padding:6px 0;font:500 14.5px var(--sans);color:var(--ink);text-decoration:none;transition:color .4s ease}
+.links a:hover{color:var(--navy)}
+.links a::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;border-radius:2px;background:var(--navy);opacity:0;transform:scaleX(.4);transition:opacity .3s,transform .3s,background-color .4s}
+.links a:hover::after{opacity:.35;transform:none}
+.links a.active::after{opacity:1;transform:none}
+.menu-btn{position:relative;width:42px;height:42px;border-radius:50%;border:1px solid rgba(17,52,93,.15);background:rgba(255,255,255,.7);color:var(--ink);display:grid;place-items:center;cursor:pointer;flex:none;margin-left:auto;transition:background-color .4s,color .4s,border-color .4s}
+.links + .menu-btn{margin-left:0}
+.menu-btn:hover{background:#fff}
+/* homepage + contact: dark glass over the navy, cross-fading to white once you scroll */
+body.has-hero .topbar:not(.scrolled){background:rgba(255,255,255,0);border-color:rgba(17,52,93,0);box-shadow:0 8px 28px rgba(8,27,51,0)}
+body.has-hero .topbar:not(.scrolled)::before{opacity:1}
+body.has-hero .topbar:not(.scrolled) .brandmark .m-dk{opacity:0}
+body.has-hero .topbar:not(.scrolled) .brandmark .m-lt{opacity:1}
+body.has-hero .topbar:not(.scrolled) .links a{color:#E8EEF5}
+body.has-hero .topbar:not(.scrolled) .links a::after{background:#fff}
+body.has-hero .topbar:not(.scrolled) .menu-btn{background:rgba(255,255,255,.08);border-color:rgba(185,200,218,.3);color:#fff}
+@media (max-width:860px){.links{gap:22px}.links a{font-size:14px}.topbar{gap:14px;padding-left:20px}.brandmark{margin-right:22px}}
+@media (max-width:760px){.links{display:none}.topbar{gap:12px;padding-left:18px}.brandmark{margin-right:0}}
+/* phones: bar shows at the top and whenever you scroll up; tucks away while you scroll down */
+@media (max-width:760px){
+  .topbar{transition:height .5s var(--ease),top .5s var(--ease),background-color .4s ease,border-color .4s ease,box-shadow .4s ease,transform .45s var(--ease)}
+  /* tucking away (moving up) is slower and gentler; coming back down keeps its current speed */
+  .topbar.hide{transform:translate(-50%,calc(-100% - 24px));transition:height .5s var(--ease),top .5s var(--ease),background-color .4s ease,border-color .4s ease,box-shadow .4s ease,transform .85s cubic-bezier(.33,.0,.2,1)}
+}
+@media (prefers-reduced-motion:reduce){.topbar,.topbar *,.topbar::before{transition:none!important}}
+
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(8,27,51,.4);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;transition:opacity .25s}
+.scrim.on{opacity:1}
+.drawer{position:fixed;z-index:50;top:0;right:0;bottom:0;width:min(400px,90vw);background:var(--navy-deep);color:#fff;display:flex;flex-direction:column;
+  padding:22px 28px 28px;transform:translateX(100%);visibility:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s .3s;overflow-y:auto}
+.drawer.open{transform:none;visibility:visible;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.drawer>*{flex-shrink:0}
+.dr-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+.dr-head img{width:150px;height:auto}
+.dr-close{width:44px;height:44px;border-radius:50%;border:1px solid rgba(185,200,218,.35);background:transparent;color:#fff;display:grid;place-items:center;cursor:pointer}
+.dr-close:hover{background:rgba(255,255,255,.08)}
+.dr-label{margin:0 0 6px;font:600 13px var(--sans);color:var(--frost)}
+.dr-links{display:flex;flex-direction:column;margin-bottom:24px}
+.dr-links a{position:relative;display:flex;align-items:center;justify-content:space-between;margin:0 -12px;padding:12px 12px;border-radius:12px;
+  font:500 22px/1.2 var(--serif);color:#D6E0EC;text-decoration:none;transition:color .2s,background .2s,padding .2s}
+.dr-links a::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:1px;background:rgba(185,200,218,.14);transition:opacity .2s}
+.dr-links a:hover::after,.dr-links a:focus-visible::after{opacity:0}
+.dr-links a svg{opacity:.45;transition:transform .2s,opacity .2s}
+.dr-links a:hover,.dr-links a:focus-visible{color:#fff;background:rgba(255,255,255,.07);padding-left:18px}
+.dr-links a:hover svg,.dr-links a:focus-visible svg{opacity:1;transform:translateX(3px)}
+.dr-team{margin-top:auto;padding:18px;border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid rgba(185,200,218,.2)}
+.dr-team p{margin:0 0 2px;font:400 13.5px var(--sans);color:var(--frost)}
+.dr-team h3{margin:0 0 12px;font:500 20px/1.2 var(--serif);color:#fff}
+.dr-team-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:46px;border-radius:999px;background:#fff;color:var(--navy);font:600 15px var(--sans);text-decoration:none;
+  box-shadow:0 8px 20px rgba(4,14,28,.25);transition:background .2s,transform .2s,box-shadow .2s}
+.dr-team-btn:hover{background:#EEF2F7;transform:translateY(-1px);box-shadow:0 12px 26px rgba(4,14,28,.32)}
+.dr-contact{margin:16px 0 0;font:400 13.5px var(--sans);color:var(--frost)}
+.dr-contact a{color:#fff;text-decoration:none;font-weight:500}
+.dr-contact a:hover{text-decoration:underline;text-underline-offset:4px}
+
+/* subpage header (legacy) */
+.bar{max-width:1120px;margin:0 auto;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.mark{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--navy)}
+.mark img{height:22px;width:auto;flex:none}
+.mark span{font:500 17px/1 var(--serif);letter-spacing:.01em;white-space:nowrap}
+@media (max-width:480px){.tb-actions .pill{display:none}}
+.back{font:600 14px var(--sans);color:var(--navy);text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:8px 2px}
+.back:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* forms */
+.field{display:flex;flex-direction:column;gap:6px}
+.field span,.label{font:600 13.5px var(--sans);color:var(--ink)}
+.field span em{font-style:normal;font-weight:400;color:var(--slate)}
+input[type=text],input[type=email],input[type=tel],input[type=password],input:not([type]),textarea{
+  width:100%;padding:10px 14px;min-height:44px;border-radius:12px;border:1.5px solid #D3DCE7;background:#F4F7FA;
+  font:400 15px var(--sans);color:var(--ink);outline:0;transition:border-color .2s,box-shadow .2s,background .2s}
+select{width:100%;min-height:44px;padding:10px 42px 10px 14px;border-radius:12px;border:1.5px solid #D3DCE7;font:400 15px var(--sans);color:var(--ink);outline:0;cursor:pointer;
+  -webkit-appearance:none;appearance:none;background:#F4F7FA url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2311345D' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 15px center;transition:border-color .2s,box-shadow .2s,background-color .2s}
+select:hover{border-color:#B9C6D6}
+select:focus{border-color:var(--navy);background-color:#fff;box-shadow:0 0 0 4px rgba(17,52,93,.12)}
+input::placeholder,textarea::placeholder{color:#8A96A8}
+input:hover,textarea:hover{border-color:#B9C6D6}
+textarea{min-height:104px;resize:vertical;line-height:1.5}
+input:focus,textarea:focus{border-color:var(--navy);background:#fff;box-shadow:0 0 0 4px rgba(17,52,93,.12)}
+input:user-invalid,textarea:user-invalid{border-color:#B4232A;background:#fff;box-shadow:0 0 0 4px rgba(180,35,42,.08)}
+input[type=checkbox]{appearance:none;-webkit-appearance:none;width:20px;height:20px;min-height:0;padding:0;margin:1px 0 0;flex:none;border-radius:6px;border:1.5px solid #B9C6D6;background:#fff;display:grid;place-items:center;cursor:pointer}
+input[type=checkbox]::after{content:"";width:10px;height:6px;border:2px solid #fff;border-top:0;border-right:0;transform:rotate(-45deg) translate(1px,-1px);opacity:0}
+input[type=checkbox]:checked{background:var(--navy);border-color:var(--navy)}
+input[type=checkbox]:checked::after{opacity:1}
+input[type=checkbox]:focus-visible{box-shadow:0 0 0 4px rgba(17,52,93,.15)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 22px;border-radius:999px;
+  font:600 15px var(--sans);text-decoration:none;cursor:pointer;border:1px solid transparent;transition:background .2s,color .2s,border-color .2s,transform .2s,box-shadow .2s}
+.btn-primary{background:var(--navy);color:#fff;box-shadow:0 8px 20px rgba(17,52,93,.22)}
+.btn-primary:hover{background:var(--navy-deep);transform:translateY(-1px);box-shadow:0 12px 26px rgba(17,52,93,.28)}
+.btn-ghost{background:#fff;color:var(--navy);border-color:rgba(17,52,93,.3)}
+.btn-ghost:hover{border-color:var(--navy);background:#F0F4F8}
+.btn-light{background:#fff;color:var(--navy)}
+.btn-light:hover{background:#EEF2F7;transform:translateY(-1px)}
+.btn-line{background:transparent;color:#fff;border-color:rgba(185,200,218,.45)}
+.btn-line:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+.btn[disabled]{opacity:.6;cursor:default;transform:none}
+.status{font:400 14px var(--sans);color:var(--slate);margin:2px 0 0}
+.status:empty{display:none}
+.status.ok{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;background:#EAF4EE;color:#14532D;font-weight:500}
+
+/* footer */
+.site-foot{background:var(--navy-ink);color:#C9D5E3;font:400 14.5px var(--sans)}
+.site-foot .in{max-width:1168px;margin:0 auto;padding:0 24px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;align-items:start;padding:60px 0 44px}
+.foot-brand{max-width:310px;text-align:center}
+.foot-brand a{display:inline-block}
+.foot-brand img{display:block;width:200px;height:auto;margin:0 auto 16px}
+.foot-brand p{margin:0 auto;font:400 16px/1.6 var(--serif);color:#C9D5E3}
+.foot-col{display:flex;flex-direction:column;align-items:flex-start;gap:11px}
+.foot-col h4{margin:0 0 4px;font:600 14px var(--sans);color:#fff}
+.foot-col a{display:inline-flex;align-items:center;gap:6px;color:#C9D5E3;text-decoration:none;line-height:1.4;transition:color .2s,transform .2s}
+.foot-col a:hover{color:#fff;transform:translateY(-2px)}
+.foot-col a svg{opacity:.6}
+.foot-bottom{display:flex;justify-content:space-between;gap:10px 24px;flex-wrap:wrap;padding:22px 0 30px;border-top:1px solid rgba(185,200,218,.16);font-size:12.5px;color:#8FA1B8}
+@media (max-width:860px){.foot-grid{grid-template-columns:repeat(3,1fr);gap:32px 24px;text-align:center;justify-items:center}.foot-brand{grid-column:1/-1;margin:0 auto 8px}.foot-col{align-items:center}.foot-bottom{justify-content:center;text-align:center}}
+/* phones: a small footer with just the essentials */
+.foot-mini{display:none}
+@media (max-width:760px){
+  .foot-grid,.foot-bottom{display:none}
+  .foot-mini{display:flex;flex-direction:column;align-items:center;gap:14px;padding:30px 0 calc(28px + env(safe-area-inset-bottom,0px));text-align:center;font-size:12.5px;color:#8FA1B8}
+  .fm-logo img{width:132px;height:auto;display:block}
+  .foot-mini nav{display:flex;gap:22px}
+  .foot-mini nav a{color:#E8EEF5;text-decoration:none;font:500 14px var(--sans)}
+  .foot-mini nav a:hover{text-decoration:underline;text-underline-offset:4px}
+}
+@media (max-width:600px){
+  .foot-grid{grid-template-columns:1fr;gap:30px;padding-top:48px;text-align:center;justify-items:center}
+  .foot-brand{max-width:300px}
+  .foot-col{align-items:center}
+  .foot-bottom{justify-content:center;text-align:center}
+}
+/* ---- mobile polish (shared) ---- */
+@media (max-width:760px){
+  body.with-bar{padding-top:calc(var(--bar-top) + var(--bar-h) + 22px)}
+  .topbar{width:calc(100% - 24px)}
+  .drawer{padding:18px 22px 24px}
+  .dr-links a{font-size:21px;padding:11px 12px}
+}
+
+.wrap{max-width:1120px;margin:0 auto;padding:8px 24px 96px}
+.doc{max-width:760px;margin:24px auto 0;background:#fff;border:1px solid var(--mist);border-radius:22px;padding:clamp(28px,5vw,60px);box-shadow:0 18px 44px rgba(17,52,93,.06)}
+h1{margin:0 0 14px;font:500 clamp(34px,4.2vw,46px)/1.1 var(--serif);color:var(--navy);letter-spacing:-.01em}
+.updated{font:400 14px var(--sans);color:var(--slate)}
+.notice{display:inline-block;margin:14px 0 8px;padding:6px 14px;border-radius:999px;background:#EEF2F7;font:500 13px var(--sans);color:var(--navy)}
+.terms{font-size:17.5px;line-height:1.75;color:#2A3342;border-top:1px solid var(--mist);margin-top:26px;padding-top:6px}
+.terms h2{margin:36px 0 10px;font:600 21px/1.3 var(--serif);color:var(--navy)}
+.terms p{margin:0 0 16px;max-width:68ch}
+.terms a{color:var(--navy);font-weight:600}
+@media (max-width:600px){
+  .wrap{padding:0 14px 56px}
+  .doc{margin-top:8px;padding:28px 20px;border-radius:20px}
+  h1{font-size:32px;text-align:center}
+  .updated{text-align:center}
+  .doc>.notice{display:table;margin:12px auto 4px;text-align:center;border-radius:14px}
+  .terms{font-size:16.5px;line-height:1.7}
+  .terms h2{font-size:19px;margin-top:28px}
+}
+</style>
+</head>
+<body class="with-bar">
+<header class="topbar dark" id="topbar">
+  <a class="brandmark" href="/" aria-label="Northfield Enterprise home"><img class="mono m-dk" src="/assets/ne-monogram-navy.png" alt="" width="424" height="244"><img class="mono m-lt" src="/assets/ne-monogram-white.png" alt="" width="424" height="244"><img class="word" src="/assets/northfield-enterprise-logo.png" alt="Northfield Enterprise" width="1032" height="371"></a>
+  <nav aria-label="Main"><ul class="links">
+    <li><a href="/" data-sec="home">Home</a></li>
+    <li><a href="/#overview" data-sec="overview">Company Overview</a></li>
+    <li><a href="/#companies" data-sec="companies">Our Companies</a></li>
+    <li><a href="/contact.html" data-sec="contact">Contact Us</a></li>
+  </ul></nav>
+  <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</header>
+<div class="scrim" id="scrim" hidden></div>
+<nav class="drawer" id="drawer" aria-label="Menu">
+  <div class="dr-head"><img src="/assets/northfield-enterprise-logo-white.png" alt="Northfield Enterprise" width="1032" height="371"><button class="dr-close" id="menuClose" type="button" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <p class="dr-label">Explore</p>
+  <div class="dr-links">
+    <a href="/">Home<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+    <a href="/#overview">Company Overview<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+    <a href="/#companies">Our Companies<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+    <a href="/contact.html">Contact Us<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+    <a href="/terms.html">Terms &amp; Conditions<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+  </div>
+  <div class="dr-team"><p>Are you a team member?</p><h3>Sign in here</h3><a class="dr-team-btn" href="/login.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>Team Sign In</a></div>
+  <p class="dr-contact">Questions? <a href="mailto:support@northfieldenterprise.com">support@northfieldenterprise.com</a></p>
+</nav>
+<main class="wrap">
+<article class="doc">
+
+  <h1>Terms &amp; Conditions</h1>
+  <div class="updated">Last updated: January 13, 2026</div>
+  <div class="notice">Northfield Enterprise is currently in formation.</div>
+
+  <div class="terms">
+
+    <h2>1. Acceptance of Terms</h2>
+    <p>
+      By accessing or using this website, you agree to be bound by these Terms
+      and Conditions and all applicable laws and regulations. If you do not
+      agree with any part of these terms, you must not use this website.
+    </p>
+
+    <h2>2. Use of Website</h2>
+    <p>
+      This website is provided for general informational purposes only. You
+      agree to use the site lawfully and in a manner that does not infringe the
+      rights of others or restrict or inhibit any third party’s use of the site.
+    </p>
+
+    <h2>3. No Professional or Legal Advice</h2>
+    <p>
+      Content on this website does not constitute legal, financial, business,
+      or professional advice of any kind. Any reliance on information found on
+      this site is at your own risk.
+    </p>
+
+    <h2>4. Intellectual Property</h2>
+    <p>
+      All content, branding, text, graphics, logos, and materials on this
+      website are the property of Northfield Enterprise or its licensors and
+      are protected by applicable intellectual property laws. Unauthorized use
+      is prohibited.
+    </p>
+
+    <h2>5. Third-Party Links</h2>
+    <p>
+      This website may contain links to third-party websites. Northfield
+      Enterprise has no control over, and assumes no responsibility for, the
+      content, privacy policies, or practices of any third-party sites.
+    </p>
+
+    <h2>6. Limitation of Liability</h2>
+    <p>
+      To the fullest extent permitted by law, Northfield Enterprise shall not
+      be liable for any direct, indirect, incidental, consequential, or
+      punitive damages arising out of your access to or use of this website.
+    </p>
+
+    <h2>7. Disclaimer of Warranties</h2>
+    <p>
+      This website is provided “as is” and “as available” without warranties
+      of any kind, either express or implied.
+    </p>
+
+    <h2>8. Communications and Submissions</h2>
+    <p>
+      By submitting information through this website, including through
+      contact forms or update subscription forms, you consent to being
+      contacted by Northfield Enterprise for purposes related to your
+      submission.
+    </p>
+    <p>
+      Submission of information does not create a business relationship,
+      contractual obligation, or guarantee of response.
+    </p>
+
+    <h2>9. Update and Notification Forms</h2>
+    <p>
+      This website may offer an update or notification form allowing users to
+      voluntarily provide their name and email address, and optionally a phone
+      number, to receive informational updates from Northfield Enterprise.
+      Providing a phone number is optional.
+    </p>
+    <p>
+      Information collected through update or notification forms is used
+      solely for informational or business-related communications from
+      Northfield Enterprise. We do not sell, rent, or share personal
+      information with third parties for marketing purposes.
+    </p>
+    <p>
+      Users may unsubscribe from updates at any time by following the
+      instructions included in communications or by contacting us directly.
+    </p>
+
+    <h2>10. Privacy</h2>
+    <p>
+      Any personal information submitted through this website is handled in
+      accordance with applicable privacy laws. We take reasonable measures to
+      protect submitted information but cannot guarantee absolute security.
+    </p>
+
+    <h2>11. Changes to These Terms</h2>
+    <p>
+      Northfield Enterprise reserves the right to modify these Terms and
+      Conditions at any time. Updates will be effective upon posting to this
+      page. Continued use of the website constitutes acceptance of the updated
+      terms.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      If you have questions regarding these Terms and Conditions, you may
+      contact us through the <a href="/contact.html">contact page</a>.
+    </p>
+
+  </div>
+</article>
+</main>
+
+<footer class="site-foot">
+  <div class="in">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="/" aria-label="Northfield Enterprise home"><img src="/assets/northfield-enterprise-logo-white.png" alt="Northfield Enterprise" width="1032" height="371"></a>
+        <p>Providing steady support, thoughtful guidance, and a long-term foundation for the businesses we stand behind.</p>
+      </div>
+      <nav class="foot-col" aria-label="Explore">
+        <h4>Explore</h4>
+        <a href="/">Home</a>
+        <a href="/#overview">Company Overview</a>
+        <a href="/#companies">Our Companies</a>
+      </nav>
+      <nav class="foot-col" aria-label="Company">
+        <h4>Company</h4>
+        <a href="https://northfieldmills.com" target="_blank" rel="noopener">Northfield Mills™ <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+        <a href="https://northtekindustries.com" target="_blank" rel="noopener">NorthTek Industries <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+        <a href="https://kinderlac.com" target="_blank" rel="noopener">Kinderlac <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+        <a href="https://leighsoflondon.com" target="_blank" rel="noopener">Leighs of London <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+        <a href="https://londonbros.com" target="_blank" rel="noopener">London Bros. <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+        <a href="https://leabridgeassociates.com" target="_blank" rel="noopener">Leabridge Associates <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+        <a href="/contact.html">Contact Us</a>
+        <a href="/login.html">Team Sign In</a>
+      </nav>
+      <nav class="foot-col" aria-label="Legal">
+        <h4>Legal</h4>
+        <a href="/terms.html">Terms &amp; Conditions</a>
+      </nav>
+    </div>
+    <div class="foot-mini">
+      <a class="fm-logo" href="/" aria-label="Northfield Enterprise home"><img src="/assets/northfield-enterprise-logo-white.png" alt="Northfield Enterprise" width="1032" height="371"></a>
+      <nav aria-label="Footer"><a href="/contact.html">Contact Us</a><a href="/terms.html">Terms &amp; Conditions</a></nav>
+      <span>© 2026 Northfield Enterprise. All rights reserved.</span>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Northfield Enterprise. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+<script data-keep>
+(function(){var b=document.getElementById('menuBtn');if(!b)return;var d=document.getElementById('drawer'),s=document.getElementById('scrim');
+function set(o){d.classList.toggle('open',o);b.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';
+ if(o){s.hidden=false;requestAnimationFrame(function(){s.classList.add('on')});setTimeout(function(){d.querySelector('a').focus()},60)}
+ else{s.classList.remove('on');setTimeout(function(){s.hidden=true},250);b.focus({preventScroll:true})}}
+b.onclick=function(){set(true)};s.onclick=function(){set(false)};document.getElementById('menuClose').onclick=function(){set(false)};
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&d.classList.contains('open'))set(false)});
+d.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(d.classList.contains('open'))set(false)})});
+var inPreview=false;try{inPreview=window.parent!==window&&!!window.parent.PV}catch(e){}
+var isHome=document.body.classList.contains('has-hero')&&document.querySelector('.hero');
+document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a||e.defaultPrevented||e.metaKey||e.ctrlKey||e.shiftKey||a.target==='_blank')return;
+ var h=a.getAttribute('href')||'';
+ if(isHome&&(h==='/'||h==='/index.html')){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});if(location.hash)history.replaceState(null,'','/');return}
+ if(isHome&&h.indexOf('/#')===0)return;
+ if(inPreview||!(h.charAt(0)==='/'&&h.charAt(1)!=='/')||h.indexOf('#')>-1&&h.split('#')[0]===location.pathname)return;
+ e.preventDefault();document.documentElement.classList.add('leaving');setTimeout(function(){location.href=a.href},170)});
+addEventListener('pageshow',function(){document.documentElement.classList.remove('leaving')});
+if(!inPreview&&/^#(overview|companies)$/.test(location.hash)){var tgt=document.querySelector(location.hash);if(tgt){if('scrollRestoration' in history)history.scrollRestoration='manual';window.scrollTo(0,0);setTimeout(function(){tgt.scrollIntoView({behavior:'smooth'})},300)}}
+var tb=document.getElementById('topbar'),ticking=false,was=null,curSec=null,links=tb.querySelectorAll('.links a'),secs=isHome?['overview','companies'].map(function(id){return document.getElementById(id)}).filter(Boolean):[];
+var lastY=window.scrollY,phone=window.matchMedia('(max-width:760px)');
+function prog(){var y=window.scrollY,on=y>24;if(on!==was){tb.classList.toggle('scrolled',on);was=on}
+ if(phone.matches&&!document.getElementById('drawer').classList.contains('open')){if(y>lastY+6&&y>90)tb.classList.add('hide');else if(y<lastY-6||y<=90)tb.classList.remove('hide')}else tb.classList.remove('hide');
+ if(Math.abs(y-lastY)>6||y<=90)lastY=y;
+ if(isHome){var cur='home';secs.forEach(function(el){if(el.getBoundingClientRect().top<160)cur=el.id});
+  if(cur!==curSec){curSec=cur;links.forEach(function(a){a.classList.toggle('active',a.dataset.sec===cur)})}}
+ ticking=false}
+function sc(){if(!ticking){ticking=true;requestAnimationFrame(prog)}}
+addEventListener('scroll',sc,{passive:true});addEventListener('resize',sc);prog();})();
+</script>
+</body>
+</html>

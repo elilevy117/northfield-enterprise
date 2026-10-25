@@ -1,0 +1,2 @@
+import { getStore } from '@netlify/blobs';import { requireUser } from '../_guard.mjs';
+export default async()=>{const g=await requireUser(true);if(g.error)return g.error;const s=getStore('northfield-access-requests');const {blobs}=await s.list({prefix:'pending/'});const out=[];for(const x of blobs){const v=await s.get(x.key,{type:'json',consistency:'strong'});if(v)out.push(v)}out.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));return Response.json(out,{headers:{'cache-control':'no-store'}})};

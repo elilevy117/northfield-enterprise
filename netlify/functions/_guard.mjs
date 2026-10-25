@@ -1,0 +1,2 @@
+import { getUser } from '@netlify/identity';
+export async function requireUser(adminOnly=false){ const u=await getUser(); if(!u) return {error:new Response('Unauthorized',{status:401})}; const roles=u.roles||u.appMetadata?.roles||[]; if(adminOnly&&!roles.includes('logo-admin')) return {error:new Response('Forbidden',{status:403})}; if(!adminOnly&&!roles.some(r=>r==='logo-user'||r==='logo-admin')) return {error:new Response('Forbidden',{status:403})}; return {user:u}; }

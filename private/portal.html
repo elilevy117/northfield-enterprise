@@ -1,0 +1,793 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Team Portal | Northfield Enterprise</title><style>
+:root{--accent:#11345D;--accent-soft:rgba(17,52,93,.09);--label:#1D1D1F;--sec:#6E6E73;--ter:#A1A1A6;--bg:#F5F5F7;--card:#FFFFFF;--sep:rgba(60,60,67,.12);--fill:rgba(118,118,128,.12);--red:#D70015;--orange:#C93400;--green:#248A3D;--blue:#0060DF;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Inter",system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",system-ui,"Segoe UI",Roboto,sans-serif;color-scheme:light}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--label);font:400 15px/1.47 var(--font);letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:3px solid rgba(17,52,93,.35);outline-offset:2px;border-radius:10px}
+.hide{display:none!important}
+button{font-family:inherit;letter-spacing:inherit}
+a{color:var(--accent)}
+.app{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}
+.app>div,.grid2>*{min-width:0}
+/* sidebar: frosted, like macOS */
+.side{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px;padding:26px 14px 18px;background:rgba(246,246,248,.78);-webkit-backdrop-filter:saturate(180%) blur(24px);backdrop-filter:saturate(180%) blur(24px);border-right:1px solid var(--sep);overflow-y:auto;z-index:50}
+.brand{display:flex;flex-direction:column;align-items:flex-start;gap:8px;text-decoration:none;padding:0 12px 22px}
+.brand img{height:44px;width:auto;display:block}
+.brand span{font:600 11px var(--font);letter-spacing:.08em;text-transform:uppercase;color:var(--ter)}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{display:flex;align-items:center;gap:11px;border-radius:10px;padding:8px 12px;font:500 14.5px var(--font);color:var(--label);text-decoration:none;transition:background .15s}
+.nav a svg{flex:none;color:var(--accent);opacity:.9}
+.nav a:hover{background:rgba(0,0,0,.04)}
+.nav a.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.nav .n{margin-left:auto;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--fill);color:var(--sec);font:600 11.5px var(--font);display:grid;place-items:center}
+.nav .n:empty{display:none}
+.nav .n.hot{background:var(--red);color:#fff}
+.nav .sep{height:1px;background:var(--sep);margin:12px 12px}
+.foot{margin-top:auto;display:grid;gap:0;padding-top:12px}
+.me{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.7);box-shadow:0 1px 2px rgba(0,0,0,.06);margin-bottom:8px}
+.av{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(180deg,#2C5A8F,#11345D);color:#fff;font:600 12.5px var(--font)}
+.me div{min-width:0}
+.me b{display:block;font:600 13.5px var(--font);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.me small{color:var(--sec);font-size:12px}
+.foot a,.foot button{display:block;padding:6px 12px;border-radius:8px;color:var(--sec);text-decoration:none;font:400 13.5px var(--font);background:none;border:0;cursor:pointer;text-align:left}
+.foot a:hover,.foot button:hover{color:var(--label);background:rgba(0,0,0,.04)}
+.scrim2,.mtop{display:none}
+/* main */
+.content{padding:44px clamp(18px,4vw,56px) 72px;max-width:1240px}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.head h1{font:700 clamp(30px,3.4vw,40px)/1.08 var(--display);letter-spacing:-.025em;color:var(--label);margin:0}
+.eyebrow{margin:0 0 6px;color:var(--sec);font:500 15px var(--font)}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:999px;padding:9px 18px;font:600 14px var(--font);cursor:pointer;white-space:nowrap;text-decoration:none;background:var(--fill);color:var(--accent);border:0;transition:background .15s,transform .1s}
+.btn:hover{background:rgba(118,118,128,.18)}
+.btn:active{transform:scale(.97)}
+.btn.pri{background:var(--accent);color:#fff}
+.btn.pri:hover{background:#0B2747}
+.btn.danger{color:var(--red);background:rgba(215,0,21,.08)}
+.btn.sm{padding:6px 13px;font-size:13px}
+.btn[disabled]{opacity:.45;cursor:default;transform:none}
+.card{background:var(--card);border-radius:22px;padding:22px 24px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 24px rgba(0,0,0,.04)}
+.card h2{font:600 19px var(--display);letter-spacing:-.015em;color:var(--label);margin:0 0 12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card h2 a{font:500 15px var(--font);text-decoration:none;letter-spacing:-.01em}
+.card h2 a:hover{text-decoration:underline}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:20px}
+.kpi{display:block;background:var(--card);border-radius:22px;padding:20px 22px;text-decoration:none;color:inherit;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 24px rgba(0,0,0,.04);transition:transform .2s,box-shadow .2s}
+a.kpi:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(0,0,0,.05),0 14px 34px rgba(0,0,0,.08)}
+.kpi span{display:block;color:var(--sec);font:500 14px var(--font)}
+.kpi b{display:block;font:700 40px/1.05 var(--display);letter-spacing:-.03em;color:var(--label);margin:10px 0 4px;font-variant-numeric:tabular-nums}
+.kpi small{color:var(--ter);font-size:13px}
+.kpi.warn b{color:var(--red)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.stack{display:grid;gap:20px}
+/* toolbar: segmented control + search */
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.tools select,.tools input{font:15px var(--font);color:var(--label);background:var(--fill);border:0;border-radius:10px;padding:8px 12px;outline:0;min-height:36px}
+.tools select{padding-right:30px;-webkit-appearance:none;appearance:none;background:var(--fill) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236E6E73' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 11px center}
+.tools input[type=search]{flex:1;min-width:200px;padding-left:34px;background:var(--fill) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='%238E8E93' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4'/%3E%3C/svg%3E") no-repeat 12px center}
+.chips{display:inline-flex;gap:0;background:var(--fill);border-radius:10px;padding:2px;flex-wrap:wrap}
+.chips button{border:0;background:transparent;border-radius:8px;padding:6px 16px;font:500 13.5px var(--font);color:var(--label);cursor:pointer;transition:background .15s}
+.chips button.on{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.12),0 0 0 .5px rgba(0,0,0,.04);font-weight:600}
+/* lists: inset grouped */
+.rows{background:var(--card);border-radius:22px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 24px rgba(0,0,0,.04)}
+.row{position:relative;display:grid;align-items:center;gap:14px;padding:14px 22px;border:0;cursor:pointer;text-align:left;width:100%;background:transparent;font:inherit;color:inherit;transition:background .12s}
+.row+.row::before{content:"";position:absolute;top:0;left:22px;right:0;height:1px;background:var(--sep)}
+.row:hover{background:rgba(0,0,0,.025)}
+.row.hd{cursor:default;padding-top:12px;padding-bottom:8px;font:500 12.5px var(--font);color:var(--ter);text-transform:uppercase;letter-spacing:.03em}
+.row.hd:hover{background:none}
+.row.hd+.row::before{display:none}
+.row b{display:block;font:600 15px var(--font);color:var(--label);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row small{display:block;color:var(--sec);font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:1px}
+.row .r{text-align:right;font-variant-numeric:tabular-nums}
+.row .m{color:var(--sec);font-size:14px}
+.list .row{grid-template-columns:minmax(0,1fr) auto;padding:12px 0}
+.list .row+.row::before{left:0}
+.empty{padding:48px 24px;text-align:center;color:var(--sec);font-size:15px}
+.empty b{display:block;color:var(--label);font:600 17px var(--display);margin-bottom:4px}
+.empty .btn{margin-top:14px}
+.pill{display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;font:600 12.5px var(--font);white-space:nowrap;background:var(--fill);color:var(--sec)}
+.pill.red{background:rgba(215,0,21,.1);color:var(--red)}.pill.amber{background:rgba(255,149,0,.14);color:var(--orange)}.pill.blue{background:rgba(0,113,227,.1);color:var(--blue)}.pill.green{background:rgba(52,199,89,.14);color:var(--green)}
+.co{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--label);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.co i{flex:none;width:9px;height:9px;border-radius:50%}
+.banner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 18px;border-radius:16px;background:rgba(0,113,227,.08);color:var(--label);margin-bottom:20px;font-size:14.5px}
+.banner.err{background:rgba(215,0,21,.08);color:#8A0010}
+.banner .sp{flex:1}
+/* setup checklist */
+.setup{margin-bottom:20px}
+.setup .row{grid-template-columns:44px minmax(0,1fr) auto;cursor:default}
+.setup .row:hover{background:none}
+.ic{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:#fff;background:linear-gradient(180deg,#2C5A8F,#11345D)}
+.ic.g{background:linear-gradient(180deg,#34C759,#248A3D)}.ic.o{background:linear-gradient(180deg,#FF9F0A,#C93400)}.ic.b{background:linear-gradient(180deg,#5AC8FA,#0071E3)}.ic.gr{background:linear-gradient(180deg,#AEAEB2,#8E8E93)}
+.done{color:var(--green);font:600 14px var(--font);display:inline-flex;align-items:center;gap:6px}
+/* sheet (modal) */
+.dscrim{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.28);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .25s}
+.dscrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;z-index:90;left:50%;top:50%;width:min(640px,calc(100vw - 32px));max-height:min(86vh,900px);background:var(--bg);border-radius:26px;box-shadow:0 30px 80px rgba(0,0,0,.25);display:flex;flex-direction:column;overflow:hidden;opacity:0;visibility:hidden;transform:translate(-50%,-46%) scale(.97);transition:opacity .22s,transform .3s cubic-bezier(.2,.8,.2,1),visibility 0s .3s}
+.drawer.open{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1);transition:opacity .22s,transform .3s cubic-bezier(.2,.8,.2,1)}
+.dhead{display:flex;align-items:flex-start;gap:12px;padding:22px 24px 14px;background:var(--bg)}
+.dhead div{flex:1;min-width:0}
+.dhead h3{margin:0;font:700 24px/1.15 var(--display);letter-spacing:-.02em;color:var(--label)}
+.dhead p{margin:4px 0 0;font-size:14px;color:var(--sec)}
+.x{flex:none;width:32px;height:32px;border-radius:50%;border:0;background:var(--fill);cursor:pointer;display:grid;place-items:center;color:var(--sec)}
+.x:hover{background:rgba(118,118,128,.2)}
+.dbody{flex:1;overflow-y:auto;padding:4px 24px 22px}
+.dfoot{display:flex;gap:8px;align-items:center;padding:14px 24px 20px;background:var(--bg);border-top:1px solid var(--sep)}
+.dfoot .sp{flex:1}
+/* grouped form, like iOS Settings */
+.form{background:var(--card);border-radius:16px;overflow:hidden;display:block}
+.f{position:relative;display:grid;grid-template-columns:150px minmax(0,1fr);align-items:center;gap:12px;padding:0 16px;min-height:50px}
+.f+.f::before{content:"";position:absolute;top:0;left:16px;right:0;height:1px;background:var(--sep)}
+.f>span{font:400 15px var(--font);color:var(--label)}
+.f>span em{font-style:normal;color:var(--red)}
+.f input,.f select,.f textarea{width:100%;border:0;background:transparent;font:400 15px var(--font);color:var(--label);outline:0;padding:13px 0;text-align:right}
+.f select{-webkit-appearance:none;appearance:none;cursor:pointer;padding-right:18px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23A1A1A6' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M8 9l4-4 4 4M8 15l4 4 4-4'/%3E%3C/svg%3E") no-repeat right center;text-align-last:right;color:var(--sec)}
+.f input::placeholder,.f textarea::placeholder{color:var(--ter)}
+.f.full{grid-template-columns:1fr;align-items:stretch;gap:2px;padding-top:12px}
+.f.full textarea{text-align:left;min-height:96px;resize:vertical;line-height:1.5;padding:4px 0 12px}
+.f.full input{text-align:left;padding-top:4px}
+.f.bad>span{color:var(--red)}
+.f.bad input::placeholder{color:var(--red)}
+.msg{margin:12px 4px 0;font-size:14px;color:var(--red)}
+.msg:empty{display:none}
+.hint{font-size:13px;color:var(--sec);margin:8px 16px 0;line-height:1.45}
+details.more{margin-top:18px}
+details.more summary{cursor:pointer;font:500 15px var(--font);color:var(--accent);list-style:none;padding:4px}
+details.more summary::-webkit-details-marker{display:none}
+details.more[open] summary{margin-bottom:10px}
+/* ticket conversation (iMessage-like) */
+.quick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:18px}
+.quick label{display:flex;flex-direction:column;gap:3px;background:var(--card);border-radius:14px;padding:9px 12px}
+.quick label span{font:500 11.5px var(--font);color:var(--ter);text-transform:uppercase;letter-spacing:.03em}
+.quick select,.quick input{border:0;background:transparent;font:600 14.5px var(--font);color:var(--label);outline:0;padding:0;-webkit-appearance:none;appearance:none;min-width:0;width:100%;cursor:pointer}
+.convo{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.bub{max-width:82%;align-self:flex-start;padding:10px 15px;border-radius:20px;background:#E9E9EB;white-space:pre-wrap;line-height:1.45;font-size:15px;color:var(--label)}
+.bub small{display:block;margin-bottom:2px;font-size:12px;color:var(--sec);white-space:normal}
+.bub.out{align-self:flex-end;background:var(--accent);color:#fff}
+.bub.out small{color:rgba(255,255,255,.75)}
+.bub.note{align-self:stretch;max-width:none;background:#FFF4D6;border-radius:16px}
+.reply{background:var(--card);border-radius:18px;padding:10px}
+.reply textarea{width:100%;min-height:88px;padding:10px 12px;border:0;border-radius:12px;background:var(--bg);font:400 15px var(--font);resize:vertical;outline:0}
+.reply .bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.reply .bar .sp{flex:1}
+.seg{display:inline-flex;background:var(--fill);border-radius:9px;padding:2px}
+.seg button{border:0;background:none;border-radius:7px;padding:5px 12px;font:500 13px var(--font);color:var(--label);cursor:pointer}
+.seg button.on{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.12);font-weight:600}
+.seg button[disabled]{opacity:.4;cursor:default}
+/* tasks */
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.col{background:rgba(118,118,128,.08);border-radius:22px;padding:12px}
+.col h3{margin:4px 8px 12px;font:600 15px var(--display);color:var(--label);display:flex;justify-content:space-between}
+.col h3 span{color:var(--ter);font-weight:500}
+.tcard{display:block;width:100%;text-align:left;background:var(--card);border:0;border-radius:16px;padding:13px 15px;margin-bottom:8px;cursor:pointer;font:inherit;color:inherit;box-shadow:0 1px 2px rgba(0,0,0,.05);transition:transform .15s,box-shadow .15s}
+.tcard:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.08)}
+.tcard b{display:block;font:600 15px var(--font);margin-bottom:6px}
+.tcard .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--sec)}
+.late{color:var(--red)!important;font-weight:600}
+/* charts */
+.cols{display:flex;align-items:stretch;gap:8px;height:220px}
+.cols .c{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:6px}
+.cols .cv{font:600 11.5px var(--font);color:var(--sec);white-space:nowrap;min-height:15px}
+.cols .cb{flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center}
+.cols .cb i{display:block;width:64%;max-width:44px;border-radius:8px}
+.cols .cl{font:500 12px var(--font);color:var(--ter);white-space:nowrap;min-height:15px}
+.hbar{display:grid;gap:12px}
+.hbar .r{display:grid;grid-template-columns:minmax(90px,150px) 1fr auto;gap:12px;align-items:center;font-size:14px}
+.hbar .r span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hbar .t{height:10px;border-radius:6px;background:var(--fill);overflow:hidden}
+.hbar .t i{display:block;height:100%;border-radius:6px}
+.hbar .v{font-variant-numeric:tabular-nums;color:var(--sec);font-size:13.5px;min-width:54px;text-align:right}
+.tbl{width:100%;border-collapse:collapse;font-size:14.5px}
+.tbl th{text-align:left;font:500 12.5px var(--font);color:var(--ter);text-transform:uppercase;letter-spacing:.03em;padding:8px 12px;border-bottom:1px solid var(--sep)}
+.tbl td{padding:12px;border-bottom:1px solid var(--sep);font-variant-numeric:tabular-nums}
+.tbl .n{text-align:right}
+.tbl tr:last-child td{border-bottom:0}
+.scroll{overflow-x:auto}
+.loading{padding:80px 0;text-align:center;color:var(--sec)}
+.mrow{grid-template-columns:14px minmax(0,220px) minmax(0,1fr) 90px}
+.mrow .u{width:9px;height:9px;border-radius:50%;background:var(--blue)}
+.mrow.read .u{background:transparent}
+.mrow.read b{font-weight:500}
+.mailframe{width:100%;min-height:340px;border:0;background:#fff;border-radius:16px;display:block}
+.mailtext{background:#fff;border-radius:16px;padding:16px 18px;white-space:pre-wrap;line-height:1.5;font-size:15px}
+.mhdr{background:var(--card);border-radius:16px;padding:12px 16px;margin-bottom:12px;font-size:14px;color:var(--sec);line-height:1.6}
+.mhdr b{color:var(--label);font-weight:600}
+.att{display:inline-flex;align-items:center;gap:6px;margin:10px 6px 0 0;padding:6px 10px;border-radius:10px;background:var(--fill);font-size:13px;color:var(--sec)}
+.toast{position:fixed;z-index:120;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;padding:12px 20px;border-radius:999px;background:rgba(29,29,31,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font:500 14.5px var(--font);transition:opacity .2s,transform .25s;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+/* settings */
+.conn{position:relative;display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:14px;padding:14px 0}
+.conn+.conn::before{content:"";position:absolute;top:0;left:58px;right:0;height:1px;background:var(--sep)}
+.conn .tx b{display:block;font:600 15px var(--font)}
+.conn .tx small{display:block;color:var(--sec);font-size:13.5px;line-height:1.45}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;background:var(--ter);vertical-align:1px}
+.dot.ok{background:#34C759}.dot.bad{background:var(--red)}
+.co-row{display:grid;grid-template-columns:30px minmax(0,1fr) minmax(0,1.4fr) auto;gap:8px;align-items:center;margin-bottom:8px}
+.co-row input[type=color]{width:28px;height:28px;padding:0;border:0;border-radius:50%;background:none;cursor:pointer}
+.co-row input[type=text]{min-height:38px;padding:7px 12px;border-radius:10px;border:0;background:var(--fill);font:400 14.5px var(--font);min-width:0;outline:0}
+.steps{margin:0 0 16px;padding:0;list-style:none;counter-reset:s;background:var(--card);border-radius:16px}
+.steps li{position:relative;padding:12px 16px 12px 52px;font-size:14.5px;line-height:1.45;counter-increment:s}
+.steps li+li::after{content:"";position:absolute;top:0;left:52px;right:0;height:1px;background:var(--sep)}
+.steps li::before{content:counter(s);position:absolute;left:16px;top:11px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font:600 13px var(--font);display:grid;place-items:center}
+.progress{height:6px;border-radius:3px;background:var(--fill);overflow:hidden;margin-top:14px}
+.progress i{display:block;height:100%;width:0;background:var(--accent);border-radius:3px;transition:width .3s}
+@media (max-width:1000px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.quick{grid-template-columns:1fr 1fr}}
+@media (max-width:860px){
+  .mrow{grid-template-columns:14px minmax(0,1fr) auto!important}.mrow .who{display:none}
+  .app{grid-template-columns:1fr}
+  .side{position:fixed;left:0;top:0;bottom:0;width:min(290px,86vw);height:auto;background:rgba(246,246,248,.96);transform:translateX(-100%);visibility:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s .3s;box-shadow:20px 0 50px rgba(0,0,0,.12)}
+  .side.open{transform:none;visibility:visible;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+  .scrim2{display:block;position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .25s}
+  .scrim2.on{opacity:1;pointer-events:auto}
+  .mtop{display:flex;position:sticky;top:0;z-index:30;align-items:center;justify-content:space-between;height:54px;padding:0 14px;background:rgba(245,245,247,.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--sep)}
+  .mtop img{height:18px;width:auto}
+  .mtop b{font:600 17px var(--font)}
+  .mtop button{width:36px;height:36px;border-radius:50%;border:0;background:var(--fill);display:grid;place-content:center;gap:4px;cursor:pointer;padding:0}
+  .mtop button span{display:block;width:16px;height:2px;border-radius:2px;background:var(--label)}
+  .content{padding:22px 16px 60px}
+  .head h1{font-size:32px}
+  .grid2,.board{grid-template-columns:1fr}
+  .kpis{gap:12px}.kpi{padding:16px}.kpi b{font-size:30px}
+  .row{grid-template-columns:minmax(0,1fr) auto!important;padding:13px 18px}
+  .row .xs,.row.hd{display:none}
+  .tools input[type=search]{min-width:100%}
+  .drawer{left:0;right:0;top:auto;bottom:0;width:100%;max-height:92vh;border-radius:22px 22px 0 0;transform:translateY(100%);transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s .32s}
+  .drawer.open{transform:none;transition:transform .32s cubic-bezier(.2,.8,.2,1)}
+  .f{grid-template-columns:120px minmax(0,1fr)}
+  .co-row{grid-template-columns:30px 1fr auto}.co-row .kw{grid-column:2/-1}
+}
+@media print{.side,.mtop,.tools,.acts,.banner,.setup{display:none!important}.app{display:block}body{background:#fff}.card,.kpi{break-inside:avoid;box-shadow:none;border:1px solid #ddd}}
+</style></head><body>
+<div class="app">
+<aside class="side" id="side" aria-label="Portal navigation">
+  <a class="brand" href="#overview"><img src="/assets/northfield-enterprise-logo.png" alt="Northfield Enterprise" width="1032" height="371"><span>Team Portal</span></a>
+  <nav class="nav" id="nav">
+    <a href="#overview" data-v="overview"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Overview</a>
+    <a href="#support" data-v="support"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="3" y="13" width="4" height="7" rx="1.5"/><rect x="17" y="13" width="4" height="7" rx="1.5"/></svg>Support<span class="n" id="nSupport"></span></a>
+    <a href="#email" data-v="email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email<span class="n" id="nEmail"></span></a>
+    <a href="#orders" data-v="orders"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/></svg>Orders<span class="n" id="nOrders"></span></a>
+    <a href="#reports" data-v="reports"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Reports</a>
+    <a href="#tasks" data-v="tasks"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h11"/></svg>Tasks<span class="n" id="nTasks"></span></a>
+    <a href="#contacts" data-v="contacts"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Contacts</a>
+    <div class="sep"></div>
+    <a href="/private/logos.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>Logo Library</a>
+    <a href="#team" data-v="team" data-admin class="hide"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M17 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6.3"/></svg>Team<span class="n" id="nTeam"></span></a>
+    <a href="#settings" data-v="settings" data-admin class="hide"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>Settings</a>
+  </nav>
+  <div class="foot">
+    <div class="me"><span class="av" id="meAv"></span><div><b id="meName"></b><small id="meRole"></small></div></div>
+    <a href="/set-password.html">Change password</a>
+    <a href="https://northfieldmills.com/portal" target="_blank" rel="noopener">Northfield Mills portal &#8599;</a>
+    <a href="/">Back to website</a>
+    <button id="logout" type="button">Sign out</button>
+  </div>
+</aside>
+<div class="scrim2" id="scrim2"></div>
+<div>
+  <header class="mtop"><button type="button" id="sideBtn" aria-label="Open menu" aria-controls="side" aria-expanded="false"><span></span><span></span><span></span></button><b id="mTitle">Team Portal</b><img src="/assets/ne-monogram-navy.png" alt="" width="424" height="244"></header>
+  <main class="content" id="view"><div class="loading">Loading&hellip;</div></main>
+</div>
+</div>
+<div class="dscrim" id="dscrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-labelledby="dTitle">
+  <div class="dhead"><div><h3 id="dTitle"></h3><p id="dSub"></p></div><button class="x" type="button" id="dClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="dbody" id="dBody"></div>
+  <div class="dfoot" id="dFoot"></div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){var b=document.getElementById('sideBtn'),d=document.getElementById('side'),s=document.getElementById('scrim2');
+function set(o){d.classList.toggle('open',o);s.classList.toggle('on',o);b.setAttribute('aria-expanded',o)}
+b.onclick=function(){set(true)};s.onclick=function(){set(false)};d.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});})();
+</script>
+<script type="module">
+import {getUser,logout} from 'https://cdn.jsdelivr.net/npm/@netlify/identity@2.0.0/+esm';
+const q=(s,r=document)=>r.querySelector(s), qa=(s,r=document)=>[...r.querySelectorAll(s)];
+const user=await getUser();
+if(!user){location.replace('/login.html');throw 0}
+const roles=user.roles||user.appMetadata?.roles||user.app_metadata?.roles||[];
+const ADMIN=roles.includes('logo-admin');
+const ME=(user.email||'').toLowerCase();
+const MYNAME=user.userMetadata?.full_name||user.user_metadata?.full_name||'';
+q('#logout').onclick=async()=>{try{await logout()}catch(e){}location.replace('/login.html')};
+qa('[data-admin]').forEach(el=>el.classList.toggle('hide',!ADMIN));
+q('#meName').textContent=MYNAME||ME;q('#meRole').textContent=ADMIN?'Admin':'Team member';q('#meAv').textContent=initials(MYNAME||ME);
+
+/* ---------- helpers ---------- */
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function initials(s){const p=String(s||'?').split('@')[0].split(/[\s._-]+/).filter(Boolean);return ((p[0]||'?')[0]+((p[1]||'')[0]||'')).toUpperCase()}
+function toast(m){const t=q('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2600)}
+const today=()=>new Date().toISOString().slice(0,10);
+const d10=x=>x?String(x).slice(0,10):'';
+function fmtDate(x){if(!x)return '';const d=new Date(String(x).length===10?x+'T12:00:00':x);return isNaN(d)?String(x):d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:d.getFullYear()===new Date().getFullYear()?undefined:'numeric'})}
+function ago(x){if(!x)return '';const s=(Date.now()-new Date(x))/1000;if(s<60)return 'just now';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';const d=Math.floor(s/86400);return d<30?d+'d ago':fmtDate(x)}
+function age(x){const d=Math.floor((Date.now()-new Date(x))/864e5);return d<1?'today':d+'d'}
+function num(v){const n=parseFloat(String(v??'').replace(/[^0-9.-]/g,''));return isFinite(n)?n:0}
+function money(v,dec){try{return new Intl.NumberFormat(undefined,{style:'currency',currency:S().currency||'USD',minimumFractionDigits:0,maximumFractionDigits:dec??(Math.abs(v)>=1000||Number.isInteger(v||0)?0:2)}).format(v||0)}catch(e){return (v||0).toFixed(2)}}
+const int=v=>new Intl.NumberFormat().format(Math.round(v||0));
+const monthKey=x=>d10(x).slice(0,7);
+function monthLabel(k){const [y,m]=k.split('-');return new Date(+y,+m-1,1).toLocaleDateString(undefined,{month:'short'})}
+const has=(r,s,keys)=>!s||keys.some(k=>String(r[k]??'').toLowerCase().includes(s));
+
+/* ---------- data ---------- */
+const DB={tickets:[],orders:[],contacts:[],tasks:[],settings:[],signups:[]};
+let CONN=null;
+const DEFAULTS={currency:'USD',defaultCompany:'Northfield Enterprise',amazonCompany:'Northfield Mills',autoCloseDays:7,reportRecipients:'',signature:'',
+  companies:[{name:'Northfield Enterprise',color:'#11345D',keywords:'northfield enterprise'},{name:'Northfield Mills',color:'#7A2E2A',keywords:'northfield mills, pancake, waffle, mix'},{name:'NorthTek Industries',color:'#2F6FB2',keywords:'northtek'},{name:'Kinderlac',color:'#C27A1A',keywords:'kinderlac, formula, baby'},{name:'London Bros',color:'#5B4B8A',keywords:'london bros'},{name:'Leighs of London',color:'#1E7A62',keywords:'leighs'},{name:'Leabridge Associates',color:'#6B6440',keywords:'leabridge'}],
+  channels:['Amazon','Website','Wholesale','Retail','Distributor','Other']};
+const S=()=>({...DEFAULTS,...(DB.settings[0]||{})});
+const COMPANIES=()=>S().companies.map(c=>c.name);
+const coColor=n=>(S().companies.find(c=>c.name===n)||{}).color||'#9AA6B8';
+const coTag=n=>n?`<span class="co"><i style="background:${esc(coColor(n))}"></i>${esc(n)}</span>`:'';
+function authHeaders(extra){const h={...(extra||{})};let t='';try{t=(document.cookie.match(/(?:^|;\s*)nf_jwt=([^;]+)/)||[])[1]||''}catch(e){}if(!t){try{t=JSON.parse(localStorage.getItem('gotrue.user')||'null')?.token?.access_token||''}catch(e){}}if(t)h.Authorization='Bearer '+decodeURIComponent(t);return h}
+async function call(url,method='GET',body){
+  let r;try{r=await fetch(url,{method,headers:authHeaders(body?{'content-type':'application/json'}:{}),body:body?JSON.stringify(body):undefined})}catch(e){throw Error('Can’t reach the server. Check your connection.')}
+  const d=await r.json().catch(()=>({}));
+  if(r.status===401)throw Error('Your sign-in has expired. Sign out and sign in again.');
+  if(r.status===403&&!d.error)throw Error('Your account doesn’t have portal access yet. Ask an admin.');
+  if(!r.ok)throw Error(d.error||'Something went wrong ('+r.status+').');
+  return d;
+}
+const api=(method,c,id,body)=>call('/.netlify/functions/portal?c='+encodeURIComponent(c)+(id?'&id='+encodeURIComponent(id):''),method,body);
+const conn=(a,method='GET',body)=>call('/.netlify/functions/connections?a='+a,method,body);
+let loadErr='';
+async function loadAll(){
+  try{const d=await api('GET','all');for(const k in DB)DB[k]=d[k]||[];loadErr=''}catch(e){loadErr=e.message}
+  try{CONN=await conn('status')}catch(e){CONN=null}
+  counts();
+}
+async function save(c,rec,changes){
+  if(rec&&rec.id){const r=await api('PUT',c,rec.id,changes);put(c,r);return r}
+  const r=await api('POST',c,null,changes);DB[c].unshift(r);return r;
+}
+function put(c,r){const i=DB[c].findIndex(x=>x.id===r.id);if(i>-1)DB[c][i]=r;else DB[c].unshift(r)}
+
+/* ---------- vocab ---------- */
+const T_STATUS=['Open','In progress','Waiting on customer','Resolved','Closed'],T_DONE=['Resolved','Closed'];
+const T_CAT=['Order issue','Shipping / delivery','Return / refund','Damaged item','Product question','Billing','Wholesale enquiry','Complaint','Other'];
+const PRI=['Low','Normal','High','Urgent'];
+const O_STATUS=['New','Processing','Shipped','Delivered','Cancelled','Refunded'];
+const C_TYPE=['Customer','Subscriber','Supplier','Manufacturer','Distributor','Retailer','Partner','Press','Other'];
+const K_STATUS=['To do','In progress','Done'];
+const pillC={'Open':'red','In progress':'amber','Waiting on customer':'blue','Resolved':'green','Urgent':'red','High':'amber','New':'red','Processing':'amber','Shipped':'blue','Delivered':'green','Refunded':'red','Done':'green','Active':'green','Invited':'amber'};
+const pill=(s,label)=>s?`<span class="pill ${pillC[s]||''}">${esc(label||s)}</span>`:'';
+const short=s=>s==='Waiting on customer'?'Waiting':s;
+
+/* ---------- forms ---------- */
+const FORMS={
+  tickets:{title:'Ticket',fields:[
+    {k:'subject',l:'Subject',req:1,full:1},{k:'company',l:'Company',t:'company',req:1},{k:'category',l:'Category',t:'select',o:T_CAT},
+    {k:'customerName',l:'Customer name'},{k:'customerEmail',l:'Customer email',t:'email'},
+    {k:'priority',l:'Priority',t:'select',o:PRI,def:'Normal'},{k:'status',l:'Status',t:'select',o:T_STATUS,def:'Open'},
+    {k:'orderRef',l:'Order #'},{k:'assignee',l:'Assigned to',t:'person'},
+    {k:'description',l:'What happened',t:'textarea',full:1}]},
+  orders:{title:'Order',fields:[
+    {k:'orderNumber',l:'Order number',req:1},{k:'date',l:'Date',t:'date',def:today,req:1},
+    {k:'company',l:'Company',t:'company',req:1},{k:'channel',l:'Channel',t:'channel'},
+    {k:'customerName',l:'Customer',req:1},{k:'amount',l:'Total',t:'money',req:1},
+    {k:'status',l:'Status',t:'select',o:O_STATUS,def:'New'},{k:'tracking',l:'Tracking number'},
+    {k:'items',l:'Items',t:'textarea',full:1}]},
+  contacts:{title:'Contact',fields:[
+    {k:'name',l:'Name',req:1},{k:'organization',l:'Organization'},{k:'email',l:'Email',t:'email'},{k:'phone',l:'Phone',t:'tel'},
+    {k:'type',l:'Type',t:'select',o:C_TYPE,def:'Customer'},{k:'company',l:'Related to',t:'company'},{k:'about',l:'Notes',t:'textarea',full:1}]},
+  tasks:{title:'Task',fields:[
+    {k:'title',l:'Task',req:1,full:1},{k:'assignee',l:'Assigned to',t:'person',def:()=>ME},{k:'due',l:'Due',t:'date'},
+    {k:'status',l:'Status',t:'select',o:K_STATUS,def:'To do'},{k:'company',l:'Company',t:'company'},{k:'details',l:'Details',t:'textarea',full:1}]}
+};
+function people(){const s=new Set([ME]);for(const k of ['tickets','tasks'])for(const r of DB[k])[r.assignee,r.createdBy].forEach(x=>x&&/@/.test(x)&&s.add(String(x).toLowerCase()));return [...s].sort()}
+function fieldHtml(f,v){
+  const val=v??'',req=f.req?' required':'';let inp;
+  if(['select','company','channel'].includes(f.t)){const opts=f.t==='company'?['',...COMPANIES()]:f.t==='channel'?['',...S().channels]:[...f.o];if(val&&!opts.includes(val))opts.push(val);inp=`<select name="${f.k}"${req}>${opts.map(o=>`<option value="${esc(o)}"${o===val?' selected':''}>${esc(o||'Choose…')}</option>`).join('')}</select>`}
+  else if(f.t==='textarea')inp=`<textarea name="${f.k}" placeholder="${f.req?'Required':'Optional'}"${req}>${esc(val)}</textarea>`;
+  else if(f.t==='person')inp=`<input name="${f.k}" type="email" list="peopleList" value="${esc(val)}" placeholder="Nobody">`;
+  else{const type={email:'email',tel:'tel',money:'number',date:'date'}[f.t]||'text';inp=`<input name="${f.k}" type="${type}"${f.t==='money'?' step="0.01" inputmode="decimal"':''} value="${esc(val)}" placeholder="${f.req?'Required':'Optional'}"${req}>`}
+  return `<label class="f${f.full?' full':''}"><span>${esc(f.l)}${f.req?' <em>*</em>':''}</span>${inp}</label>`;
+}
+function readForm(form,fields){const out={};let bad=null;for(const f of fields){const el=form.elements[f.k];if(!el)continue;let v=el.value.trim();if(f.t==='money')v=v===''?null:num(v);if(['email','person'].includes(f.t))v=v.toLowerCase();out[f.k]=v;const isBad=(f.req&&(v===''||v==null))||(['email','person'].includes(f.t)&&v&&!/^\S+@\S+\.\S+$/.test(v));el.closest('.f').classList.toggle('bad',!!isBad);if(isBad&&!bad)bad=el}return {out,bad}}
+
+/* ---------- drawer ---------- */
+function openDrawer(title,sub,body,foot){q('#dTitle').textContent=title;q('#dSub').innerHTML=sub||'';q('#dBody').innerHTML=body;q('#dFoot').innerHTML=foot||'';q('#dFoot').classList.toggle('hide',!foot);q('#drawer').classList.add('open');q('#drawer').setAttribute('aria-hidden','false');q('#dscrim').classList.add('on');q('#dBody').scrollTop=0}
+function closeDrawer(){q('#drawer').classList.remove('open');q('#drawer').setAttribute('aria-hidden','true');q('#dscrim').classList.remove('on')}
+q('#dClose').onclick=closeDrawer;q('#dscrim').onclick=closeDrawer;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+
+function editRecord(c,rec,preset){
+  const F=FORMS[c];
+  const val=f=>rec?rec[f.k]:(preset?.[f.k]??(typeof f.def==='function'?f.def():f.def));
+  const sub=rec?`${esc(rec.ref||'')}${rec.source?' · from '+esc(rec.source):''} · added ${esc(fmtDate(rec.createdAt))}`:'';
+  openDrawer(rec?(rec.ref?F.title+' '+rec.ref:F.title):'New '+F.title.toLowerCase(),sub,
+    `<form class="form" id="recForm" novalidate>${F.fields.map(f=>fieldHtml(f,val(f))).join('')}</form><datalist id="peopleList">${people().map(p=>`<option value="${esc(p)}">`).join('')}</datalist><p class="msg" id="recMsg"></p>`,
+    `${rec&&ADMIN?'<button class="btn danger sm" type="button" id="recDel">Delete</button>':''}<span class="sp"></span><button class="btn" type="button" data-close>Cancel</button><button class="btn pri" type="button" id="recSave">${rec?'Save':'Add'}</button>`);
+  q('[data-close]').onclick=closeDrawer;
+  q('#recSave').onclick=async()=>{
+    const {out,bad}=readForm(q('#recForm'),F.fields);
+    if(bad){q('#recMsg').textContent='Please fill in the highlighted fields.';bad.focus();return}
+    if(c==='tickets'&&T_DONE.includes(out.status)&&!T_DONE.includes(rec?.status||''))out.resolvedAt=new Date().toISOString();
+    if(c==='tasks'&&out.status==='Done'&&rec?.status!=='Done')out.doneAt=new Date().toISOString();
+    const b=q('#recSave');b.disabled=true;
+    try{const r=await save(c,rec,out);closeDrawer();toast(rec?'Saved':'Added '+(r.ref||''));render(true)}catch(e){q('#recMsg').textContent=e.message;b.disabled=false}
+  };
+  if(q('#recDel'))q('#recDel').onclick=async()=>{if(!confirm('Delete this? It can’t be undone.'))return;try{await api('DELETE',c,rec.id);DB[c]=DB[c].filter(x=>x.id!==rec.id);closeDrawer();toast('Deleted');render(true)}catch(e){toast(e.message)}};
+}
+
+// Ticket: the conversation, a reply box, and the few fields that matter.
+function openTicket(t){
+  const msgs=[...(t.messages||[]).map(m=>({...m,kind:m.dir})),...(t.notes||[]).map(n=>({kind:'note',text:n.text,name:n.by,at:n.at}))].sort((a,b)=>String(a.at).localeCompare(String(b.at)));
+  if(!msgs.length&&t.description)msgs.push({kind:'in',text:t.description,name:t.customerName,at:t.createdAt});
+  const canEmail=!!(CONN?.mail?.connected&&t.customerEmail);
+  const quick=[['status','Status',T_STATUS],['priority','Priority',PRI],['company','Company',COMPANIES()]].map(([k,l,o])=>{const opts=[...o];if(t[k]&&!opts.includes(t[k]))opts.push(t[k]);return `<label><span>${l}</span><select data-q="${k}">${opts.map(x=>`<option${x===t[k]?' selected':''}>${esc(x)}</option>`).join('')}</select></label>`}).join('')+`<label><span>Assigned</span><input data-q="assignee" type="email" list="peopleList" value="${esc(t.assignee||'')}" placeholder="Nobody"></label>`;
+  openDrawer(t.subject,`${esc(t.ref)} · ${esc(t.customerName||t.customerEmail||'No customer')}${t.customerEmail&&t.customerName?' &lt;'+esc(t.customerEmail)+'&gt;':''} · ${esc(t.source||'Added by hand')}`,
+    `<div class="quick">${quick}</div><datalist id="peopleList">${people().map(p=>`<option value="${esc(p)}">`).join('')}</datalist>
+    <div class="convo">${msgs.map(m=>`<div class="bub ${m.kind==='out'?'out':m.kind==='note'?'note':''}"><small>${m.kind==='note'?'Internal note · ':''}${esc(m.name||m.from||'')} · ${esc(ago(m.at))}</small>${esc(m.text)}</div>`).join('')||'<p class="empty">No messages yet.</p>'}</div>
+    <div class="reply"><div class="seg" id="mode"><button type="button" data-m="reply" class="${canEmail?'on':''}"${canEmail?'':' disabled title="Connect iCloud Mail in Settings to email customers"'}>Email customer</button><button type="button" data-m="note" class="${canEmail?'':'on'}">Internal note</button></div>
+    ${canEmail&&(CONN.mail.senders||[]).length>1?`<label id="fromRow" style="display:flex;align-items:center;gap:8px;margin:10px 4px 0;font-size:14px;color:var(--sec)">From <select id="replyFrom" style="border:0;background:var(--fill);border-radius:8px;padding:5px 10px;font:600 14px var(--font);color:var(--label)">${CONN.mail.senders.map(x=>`<option value="${esc(x.address)}">${esc(x.name?x.name+' \u2013 '+x.address:x.address)}</option>`).join('')}</select></label>`:''}
+    <textarea id="replyText" placeholder="${canEmail?'Write your reply\u2026':'Add a note for the team\u2026'}" style="margin-top:8px"></textarea>
+    <div class="bar"><span class="sp"></span><button class="btn" type="button" id="sendResolve">${canEmail?'Send & resolve':'Add & resolve'}</button><button class="btn pri" type="button" id="send">${canEmail?'Send':'Add note'}</button></div><p class="msg" id="replyMsg"></p>${canEmail?'<p style="margin:6px 4px 0;font-size:12.5px;color:var(--ter)">The customer\u2019s answer arrives in your iCloud Mail inbox.</p>':''}</div>
+    <details class="more"><summary>More details</summary><div class="form">${['category','orderRef','customerName','customerEmail'].map(k=>fieldHtml(FORMS.tickets.fields.find(f=>f.k===k),t[k])).join('')}</div><div style="display:flex;gap:8px;margin-top:12px"><button class="btn sm" type="button" id="saveMore">Save details</button>${ADMIN?'<button class="btn sm danger" type="button" id="delT">Delete ticket</button>':''}</div></details>`,'');
+  let mode=canEmail?'reply':'note';
+  qa('#mode button').forEach(b=>b.onclick=()=>{if(b.disabled)return;mode=b.dataset.m;qa('#mode button').forEach(x=>x.classList.toggle('on',x===b));if(q('#fromRow'))q('#fromRow').classList.toggle('hide',mode!=='reply');q('#replyText').placeholder=mode==='reply'?'Write your reply…':'Add a note for the team…';q('#send').textContent=mode==='reply'?'Send':'Add note';q('#sendResolve').textContent=mode==='reply'?'Send & resolve':'Add & resolve'});
+  qa('[data-q]').forEach(el=>el.onchange=async()=>{const ch={[el.dataset.q]:el.value.trim()};if(el.dataset.q==='status')ch.resolvedAt=T_DONE.includes(el.value)?(t.resolvedAt||new Date().toISOString()):null;try{t=await save('tickets',t,ch);toast('Updated');render(true)}catch(e){toast(e.message)}});
+  const send=async resolve=>{
+    const text=q('#replyText').value.trim();if(!text){q('#replyMsg').textContent=mode==='reply'?'Write a reply first.':'Write a note first.';return}
+    qa('#send,#sendResolve').forEach(b=>b.disabled=true);q('#replyMsg').textContent='';
+    try{
+      const r=mode==='reply'?await conn('reply','POST',{id:t.id,text,resolve,from:q('#replyFrom')?.value}):await api('PUT','tickets',t.id,{notesAdd:[{text}],...(resolve?{status:'Resolved',resolvedAt:new Date().toISOString()}:{})});
+      put('tickets',r);counts();toast(mode==='reply'?'Reply sent':'Note added');render(true);openTicket(r);
+    }catch(e){q('#replyMsg').textContent=e.message;qa('#send,#sendResolve').forEach(b=>b.disabled=false)}
+  };
+  q('#send').onclick=()=>send(false);q('#sendResolve').onclick=()=>send(true);
+  q('#saveMore').onclick=async()=>{const ch={};for(const k of ['category','orderRef','customerName','customerEmail'])ch[k]=q(`details.more [name="${k}"]`).value.trim();try{t=await save('tickets',t,ch);toast('Saved');render(true)}catch(e){toast(e.message)}};
+  if(q('#delT'))q('#delT').onclick=async()=>{if(!confirm('Delete '+t.ref+'?'))return;try{await api('DELETE','tickets',t.id);DB.tickets=DB.tickets.filter(x=>x.id!==t.id);closeDrawer();counts();render(true)}catch(e){toast(e.message)}};
+}
+
+/* ---------- csv ---------- */
+function toCSV(rows,cols){const e=v=>{v=v==null?'':String(v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};return [cols.map(c=>e(c[1])).join(','),...rows.map(r=>cols.map(c=>e(typeof c[0]==='function'?c[0](r):r[c[0]])).join(','))].join('\n')}
+function download(name,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/csv'}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
+
+/* ---------- routing ---------- */
+const VIEWS={overview,support,email,orders,reports,tasks,contacts,team,settings};
+const TITLES={overview:'Overview',support:'Support',email:'Email',orders:'Orders',reports:'Reports',tasks:'Tasks',contacts:'Contacts',team:'Team',settings:'Settings'};
+const UI={};
+function viewName(){const v=location.hash.slice(1);return VIEWS[v]&&(!['team','settings'].includes(v)||ADMIN)?v:'overview'}
+function render(keep){const v=viewName();qa('#nav a[data-v]').forEach(a=>a.classList.toggle('on',a.dataset.v===v));q('#mTitle').textContent=TITLES[v];document.title=TITLES[v]+' | Northfield Enterprise';const y=scrollY;VIEWS[v]();scrollTo(0,keep?y:0)}
+addEventListener('hashchange',()=>{closeDrawer();render()});
+function counts(){
+  const open=DB.tickets.filter(t=>!T_DONE.includes(t.status)&&t.status!=='Waiting on customer');
+  q('#nSupport').textContent=open.length||'';q('#nSupport').classList.toggle('hot',open.some(t=>t.priority==='Urgent'));
+  q('#nOrders').textContent=DB.orders.filter(o=>['New','Processing'].includes(o.status)).length||'';
+  q('#nTasks').textContent=DB.tasks.filter(t=>t.status!=='Done'&&(t.assignee||'').toLowerCase()===ME).length||'';
+}
+function head(eyebrow,title,acts){return `<div class="head"><div><p class="eyebrow">${esc(eyebrow)}</p><h1>${esc(title)}</h1></div><div class="acts">${acts||''}</div></div>${loadErr?`<div class="banner err"><span>${esc(loadErr)}</span><span class="sp"></span><button class="btn sm" data-reload>Try again</button><button class="btn sm" data-relogin>Sign in again</button></div>`:''}`}
+function chips(name,opts,cur){return `<div class="chips" data-chips="${name}">${opts.map(([v,l])=>`<button type="button" data-val="${esc(v)}" class="${v===cur?'on':''}">${esc(l)}</button>`).join('')}</div>`}
+function coSelect(cur){return `<select data-f="co" aria-label="Company"><option value="">All companies</option>${COMPANIES().map(c=>`<option${c===cur?' selected':''}>${esc(c)}</option>`).join('')}</select>`}
+function wire(state,rerender){
+  qa('[data-chips]').forEach(g=>g.onclick=e=>{const b=e.target.closest('button');if(!b)return;state[g.dataset.chips]=b.dataset.val;rerender()});
+  qa('[data-f]').forEach(el=>el.oninput=()=>{state[el.dataset.f]=el.value;if(el.type==='search'){clearTimeout(el._t);el._t=setTimeout(()=>{rerender();const n=q(`[data-f="${el.dataset.f}"]`);n.focus();n.setSelectionRange(n.value.length,n.value.length)},200)}else rerender()});
+  qa('[data-relogin]').forEach(b=>b.onclick=async()=>{try{await logout()}catch(e){}location.replace('/login.html')});
+  qa('[data-reload]').forEach(b=>b.onclick=async()=>{b.disabled=true;await loadAll();render(true)});
+  qa('[data-open]').forEach(el=>el.onclick=()=>{const [c,id]=el.dataset.open.split(':');const r=DB[c].find(x=>x.id===id);if(!r)return;c==='tickets'?openTicket(r):editRecord(c,r)});
+  wireSync();
+}
+const EMPTY_IN_=()=>`<div class="empty"><b>Nothing here yet</b>Messages from your website forms will appear here by themselves.${ADMIN?'<br><button class="btn pri" data-import>Import past website messages</button>':''}</div>`;
+const SYNC='';
+function wireSync(){qa('[data-sync]').forEach(b=>b.onclick=async()=>{const label=b.textContent;b.disabled=true;b.textContent='Checking…';try{const r=await conn('sync','POST',{});await loadAll();render(true);const n=(r.mail?.created||0)+(r.mail?.added||0);toast(r.mail?.error?'Mail: '+r.mail.error:n?n+' new message'+(n===1?'':'s'):'Nothing new')}catch(e){toast(e.message);b.disabled=false;b.textContent=label}})}
+
+/* ---------- overview ---------- */
+function overview(){
+  const mk=today().slice(0,7);
+  const open=DB.tickets.filter(t=>!T_DONE.includes(t.status));
+  const needs=open.filter(t=>t.status!=='Waiting on customer').sort((a,b)=>PRI.indexOf(b.priority)-PRI.indexOf(a.priority)||String(a.lastInboundAt||a.createdAt).localeCompare(String(b.lastInboundAt||b.createdAt)));
+  const live=o=>!['Cancelled','Refunded'].includes(o.status);
+  const mo=DB.orders.filter(o=>monthKey(o.date)===mk&&live(o));const rev=mo.reduce((a,o)=>a+num(o.amount),0);
+  const su=DB.signups.filter(x=>monthKey(x.createdAt)===mk).length;
+  const hr=new Date().getHours();
+  const mailOn=!!CONN?.mail?.connected,imported=!!CONN?.forms?.last?.at||DB.tickets.some(t=>t.source==='Website form')||DB.signups.length>0;
+  const setup=ADMIN&&CONN&&!(mailOn&&imported)?`<div class="card setup"><h2>Finish setting up</h2><div class="list">
+    <div class="row"><span class="ic g"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><span><b>Bring in past website messages and sign-ups</b><small>Everything already sent through your website forms appears here.</small></span>${imported?'<span class="done">✓ Done</span>':'<button class="btn pri sm" data-import>Import</button>'}</div>
+    <div class="row"><span class="ic b"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span><b>Connect iCloud Mail</b><small>So your replies go out from your own addresses.</small></span>${mailOn?'<span class="done">✓ Done</span>':'<button class="btn pri sm" data-mail>Connect</button>'}</div>
+    <div class="row"><span class="ic o"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg></span><span><b>Amazon orders</b><small>Switches on after launch – orders and revenue fill in by themselves.</small></span><span class="pill">Later</span></div>
+  </div></div>`:'';
+  q('#view').innerHTML=head(new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'}),(hr<12?'Good morning':hr<18?'Good afternoon':'Good evening')+(MYNAME?', '+MYNAME.split(' ')[0]:''),SYNC)+setup+`
+  <div class="kpis">
+    <a class="kpi${needs.some(t=>t.priority==='Urgent')?' warn':''}" href="#support"><span>Need a reply</span><b>${needs.length}</b><small>${open.length-needs.length} waiting on customers</small></a>
+    <a class="kpi" href="#orders"><span>Orders this month</span><b>${mo.length}</b><small>${DB.orders.filter(o=>['New','Processing'].includes(o.status)).length} to fulfil</small></a>
+    <a class="kpi" href="#reports"><span>Revenue this month</span><b>${money(rev)}</b><small>all companies</small></a>
+    <a class="kpi" href="#contacts"><span>Sign-ups this month</span><b>${su}</b><small>${DB.signups.length} in total</small></a>
+  </div>
+  <div class="grid2">
+    <div class="card"><h2>Needs a reply <a href="#support">All tickets</a></h2><div class="list">${needs.slice(0,6).map(t=>`<button class="row" data-open="tickets:${t.id}"><span><b>${esc(t.subject)}</b><small>${esc(t.customerName||t.customerEmail||'')} · ${esc(t.company)} · ${ago(t.lastInboundAt||t.createdAt)}</small></span>${t.priority==='Urgent'||t.priority==='High'?pill(t.priority):pill(t.status,short(t.status))}</button>`).join('')||'<div class="empty">All caught up.</div>'}</div></div>
+    <div class="card"><h2>Latest orders <a href="#orders">All orders</a></h2><div class="list">${[...DB.orders].sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,6).map(o=>`<button class="row" data-open="orders:${o.id}"><span><b>${esc(o.customerName||'')} · ${money(num(o.amount))}</b><small>${esc(o.company)} · ${fmtDate(o.date)}${o.source?' · '+esc(o.source):''}</small></span>${pill(o.status)}</button>`).join('')||`<div class="empty">Orders will show here automatically once Amazon is connected.</div>`}</div></div>
+  </div>`;
+  wire({},overview);
+  qa('[data-import]').forEach(b=>b.onclick=importForms);qa('[data-mail]').forEach(b=>b.onclick=connectMail);
+}
+
+/* ---------- support ---------- */
+function support(){
+  const st=UI.support||(UI.support={s:'active',co:'',q:''});
+  const list=DB.tickets.filter(t=>(st.s==='active'?!T_DONE.includes(t.status)&&t.status!=='Waiting on customer':st.s==='waiting'?t.status==='Waiting on customer':st.s==='done'?T_DONE.includes(t.status):true)&&(!st.co||t.company===st.co)&&has(t,(st.q||'').toLowerCase(),['ref','subject','customerName','customerEmail','orderRef','description']))
+    .sort((a,b)=>st.s==='active'?PRI.indexOf(b.priority)-PRI.indexOf(a.priority)||String(a.lastInboundAt||a.createdAt).localeCompare(String(b.lastInboundAt||b.createdAt)):String(b.updatedAt).localeCompare(String(a.updatedAt)));
+  const cols='grid-template-columns:minmax(0,2.6fr) minmax(0,1.1fr) 130px 60px';
+  q('#view').innerHTML=head('Website messages arrive here by themselves','Support',`${SYNC}<button class="btn" data-new>+ New</button>`)+`
+  <div class="tools">${chips('s',[['active','Needs reply'],['waiting','Waiting'],['done','Resolved'],['all','All']],st.s)}${coSelect(st.co)}<input type="search" data-f="q" value="${esc(st.q)}" placeholder="Search"></div>
+  <div class="rows"><div class="row hd" style="${cols}"><span>Ticket</span><span class="xs">Company</span><span>Status</span><span class="xs r">Age</span></div>
+  ${list.map(t=>`<button class="row" style="${cols}" data-open="tickets:${t.id}"><span><b>${esc(t.subject)}</b><small>${esc(t.customerName||t.customerEmail||'No customer')} · ${esc(t.ref)}${t.source?' · '+esc(t.source):''}</small></span><span class="xs">${coTag(t.company)}</span><span>${t.priority==='Urgent'&&!T_DONE.includes(t.status)?pill('Urgent'):pill(t.status,short(t.status))}</span><span class="xs r m">${age(t.createdAt)}</span></button>`).join('')||(DB.tickets.length?`<div class="empty">${st.s==='active'?'<b>All caught up</b>Nothing needs a reply right now.':'Nothing here.'}</div>`:EMPTY_IN_())}</div>`;
+  q('[data-new]').onclick=()=>editRecord('tickets',null,{company:st.co||undefined});
+  wire(st,support);qa('[data-import]').forEach(b=>b.onclick=importForms);
+}
+
+/* ---------- email (company mailbox, own-domain mail only) ---------- */
+const MAIL={_f:'inbox',folder:'inbox',list:null,err:'',q:'',domains:[],loading:false,at:0};
+async function loadMail(force){
+  if(MAIL.loading)return;if(!force&&MAIL.list&&Date.now()-MAIL.at<60000)return;
+  MAIL.loading=true;
+  try{const r=await conn('inbox','POST',{folder:MAIL.folder});MAIL.list=r.messages;MAIL.domains=r.domains||[];MAIL.err=r.note||'';MAIL.at=Date.now()}
+  catch(e){MAIL.err=e.message;MAIL.list=MAIL.list||[]}
+  MAIL.loading=false;
+  if(MAIL.folder==='inbox')q('#nEmail').textContent=(MAIL.list||[]).filter(m=>!m.seen).length||'';
+  if(viewName()==='email')email(true);
+}
+function email(skipLoad){
+  const connected=!!CONN?.mail?.connected;
+  const fromSel=()=>(CONN?.mail?.senders||[]).map(x=>`<option value="${esc(x.address)}">${esc(x.name?x.name+' – '+x.address:x.address)}</option>`).join('');
+  const sq=(MAIL.q||'').toLowerCase();
+  const list=(MAIL.list||[]).filter(m=>!sq||[m.subject,m.from?.name,m.from?.address,...(m.to||[]).map(t=>t.address)].join(' ').toLowerCase().includes(sq));
+  const fmtWhen=d=>{if(!d)return '';const x=new Date(d);return Date.now()-x<864e5&&x.getDate()===new Date().getDate()?x.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'}):fmtDate(d)};
+  q('#view').innerHTML=head(MAIL.domains.length?'Mail to and from @'+MAIL.domains.join(', @'):'Your company mailbox','Email',connected?`<button class="btn" data-refresh>Refresh</button><button class="btn pri" data-compose>New email</button>`:'')+
+  (!connected?`<div class="card"><div class="empty"><b>Connect iCloud Mail</b>Then mail sent to your company addresses shows up here. Personal mail is never shown.${ADMIN?'<br><button class="btn pri" data-mail>Connect</button>':''}</div></div>`:
+  `<div class="tools">${chips('folder',[['inbox','Inbox'],['sent','Sent']],MAIL.folder)}<input type="search" data-f="q" value="${esc(MAIL.q)}" placeholder="Search"></div>
+  ${MAIL.err?`<div class="banner err"><span>${esc(MAIL.err)}</span></div>`:''}
+  <div class="rows">${MAIL.list==null||MAIL.loading&&!MAIL.list?'<div class="loading">Loading mail…</div>':list.map(m=>{const who=MAIL.folder==='sent'?(m.to?.[0]?.name||m.to?.[0]?.address||''):(m.from?.name||m.from?.address||'');const to=(m.to||[]).find(t=>MAIL.domains.some(d=>t.address.endsWith('@'+d)));return `<button class="row mrow${m.seen||MAIL.folder==='sent'?' read':''}" data-uid="${m.uid}"><span class="u"></span><span class="who"><b>${esc(who)}</b></span><span><b>${esc(m.subject)}</b><small>${MAIL.folder==='sent'?'From '+esc(m.from?.address||''):'To '+esc(to?.address||'')}</small></span><span class="r m">${esc(fmtWhen(m.date))}</span></button>`}).join('')||'<div class="empty"><b>No mail yet</b>Mail to your company addresses will appear here.</div>'}</div>`);
+  wire(MAIL,()=>{if(MAIL._f!==MAIL.folder){MAIL._f=MAIL.folder;MAIL.list=null;email();}else email(true)});
+  qa('[data-mail]').forEach(b=>b.onclick=connectMail);
+  if(!connected)return;
+  q('[data-refresh]').onclick=()=>{MAIL.list=null;email()};
+  q('[data-compose]').onclick=()=>compose({});
+  qa('[data-uid]').forEach(el=>el.onclick=()=>openMail(+el.dataset.uid));
+  if(!skipLoad)loadMail(MAIL.list==null);
+  function compose(pre){
+    openDrawer(pre.inReplyTo?'Reply':'New email','',`<div class="form">
+      <label class="f"><span>From</span><select id="cFrom">${fromSel()}</select></label>
+      <label class="f"><span>To</span><input id="cTo" type="email" value="${esc(pre.to||'')}" placeholder="name@company.com"></label>
+      <label class="f"><span>Subject</span><input id="cSub" type="text" value="${esc(pre.subject||'')}" placeholder="Subject"></label>
+      <label class="f full"><span>Message</span><textarea id="cText" style="min-height:200px" placeholder="Write your email…"></textarea></label></div><p class="msg" id="cMsg"></p>`,
+      `<span class="sp"></span><button class="btn" type="button" data-close>Cancel</button><button class="btn pri" type="button" id="cGo">Send</button>`);
+    if(pre.from)q('#cFrom').value=pre.from;
+    q('[data-close]').onclick=closeDrawer;
+    q('#cGo').onclick=async()=>{const b=q('#cGo');b.disabled=true;q('#cMsg').textContent='';
+      try{const sig=S().signature?'\n\n'+S().signature:'';await conn('send','POST',{from:q('#cFrom').value,to:q('#cTo').value.trim(),subject:q('#cSub').value.trim(),text:q('#cText').value+sig,inReplyTo:pre.inReplyTo,references:pre.references});closeDrawer();toast('Sent');if(MAIL.folder==='sent'){MAIL.list=null;email()}}
+      catch(e){q('#cMsg').textContent=e.message;b.disabled=false}};
+  }
+  async function openMail(uid){
+    openDrawer('Loading…','','<div class="loading">Opening…</div>','');
+    try{
+      const m=await conn('read','POST',{folder:MAIL.folder,uid});
+      const it=(MAIL.list||[]).find(x=>x.uid===uid);if(it&&!it.seen){it.seen=true;q('#nEmail').textContent=(MAIL.list||[]).filter(x=>!x.seen).length||''}
+      const mine=(m.to||[]).concat(m.cc||[]).find(t=>(CONN.mail.senders||[]).some(x=>x.address===t.address));
+      openDrawer(m.subject,'',`<div class="mhdr"><b>${esc(m.from.name||m.from.address)}</b> &lt;${esc(m.from.address)}&gt;<br>To ${esc((m.to||[]).map(t=>t.address).join(', '))}${m.cc?.length?'<br>Cc '+esc(m.cc.map(t=>t.address).join(', ')):''}<br>${esc(new Date(m.date).toLocaleString())}</div>
+        ${m.html?'<iframe class="mailframe" sandbox="allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>':`<div class="mailtext">${esc(m.text)}</div>`}
+        ${m.attachments.length?m.attachments.map(a=>`<span class="att">📎 ${esc(a.name)}</span>`).join(''):''}`,
+        `${MAIL.folder==='inbox'?'<button class="btn" type="button" id="mTicket">Make ticket</button>':''}<span class="sp"></span><button class="btn pri" type="button" id="mReply">Reply</button>`);
+      if(m.html){const f=q('.mailframe');f.srcdoc='<base target="_blank"><style>body{font-family:-apple-system,system-ui,sans-serif;font-size:15px;line-height:1.5;color:#1d1d1f;margin:16px;word-wrap:break-word}img{max-width:100%;height:auto}</style>'+m.html;f.onload=()=>{try{f.style.height=Math.min(1600,f.contentDocument.body.scrollHeight+40)+'px'}catch(e){}}}
+      q('#mReply').onclick=()=>{const re=/^re:/i.test(m.subject)?m.subject:'Re: '+m.subject;const quote='\n\n\nOn '+new Date(m.date).toLocaleString()+', '+(m.from.name||m.from.address)+' wrote:\n'+String(m.text||new DOMParser().parseFromString(m.html||'','text/html').body.innerText||'').trim().split('\n').map(l=>'> '+l).join('\n');
+        compose({to:MAIL.folder==='sent'?(m.to?.[0]?.address||''):m.from.address,subject:re,from:mine?.address,inReplyTo:m.messageId,references:[...(m.references||[]),m.messageId].filter(Boolean)});q('#cText').value=quote;q('#cText').setSelectionRange(0,0);q('#cText').focus()};
+      if(q('#mTicket'))q('#mTicket').onclick=async()=>{try{const r=await conn('to-ticket','POST',{uid});put('tickets',r.ticket);counts();closeDrawer();toast('Ticket '+r.ticket.ref+' created')}catch(e){toast(e.message)}};
+    }catch(e){openDrawer('Couldn’t open email','',`<p class="msg">${esc(e.message)}</p>`,'')}
+  }
+}
+
+/* ---------- orders ---------- */
+function orders(){
+  const st=UI.orders||(UI.orders={s:'all',co:'',q:''});
+  const list=DB.orders.filter(o=>(st.s==='all'||(st.s==='open'?['New','Processing'].includes(o.status):o.status===st.s))&&(!st.co||o.company===st.co)&&has(o,(st.q||'').toLowerCase(),['orderNumber','customerName','items','tracking'])).sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+  const tot=list.filter(o=>!['Cancelled','Refunded'].includes(o.status)).reduce((a,o)=>a+num(o.amount),0);
+  const cols='grid-template-columns:minmax(0,2.2fr) minmax(0,1.1fr) 100px 120px 100px';
+  const amz=CONN?.amazon?.configured;
+  q('#view').innerHTML=head(amz?'Amazon orders arrive here by themselves':'Amazon orders will arrive here by themselves once connected','Orders',`<button class="btn" data-export>Export</button><button class="btn" data-new>+ Add</button>`)+`
+  <div class="tools">${chips('s',[['all','All'],['open','To fulfil'],['Shipped','Shipped'],['Delivered','Delivered']],st.s)}${coSelect(st.co)}<input type="search" data-f="q" value="${esc(st.q)}" placeholder="Search"></div>
+  <div class="rows"><div class="row hd" style="${cols}"><span>Order</span><span class="xs">Company</span><span class="xs">Date</span><span>Status</span><span class="r">Total</span></div>
+  ${list.map(o=>`<button class="row" style="${cols}" data-open="orders:${o.id}"><span><b>${esc(o.customerName||'')}</b><small>${esc(o.orderNumber)}${o.source?' · '+esc(o.source):''}</small></span><span class="xs">${coTag(o.company)}</span><span class="xs m">${fmtDate(o.date)}</span><span>${pill(o.status)}</span><span class="r"><b>${money(num(o.amount))}</b></span></button>`).join('')||`<div class="empty">${amz?'No orders match.':'No orders yet. They’ll appear here automatically once Amazon is connected.'}</div>`}</div>
+  ${list.length?`<p style="margin:12px 4px 0;font-size:13.5px;color:var(--muted)">${list.length} orders · ${money(tot)}</p>`:''}`;
+  q('[data-new]').onclick=()=>editRecord('orders',null,{company:st.co||undefined});
+  q('[data-export]').onclick=()=>download('orders-'+today()+'.csv',toCSV(list,[['orderNumber','Order'],['date','Date'],['company','Company'],['channel','Channel'],['customerName','Customer'],['amount','Total'],['status','Status'],['tracking','Tracking']]));
+  wire(st,orders);
+}
+
+/* ---------- reports (all automatic) ---------- */
+function range(p){const n=new Date(),y=n.getFullYear(),m=n.getMonth(),iso=d=>new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);return {month:[iso(new Date(y,m,1)),iso(n)],'90':[iso(new Date(Date.now()-89*864e5)),iso(n)],'12':[iso(new Date(y,m-11,1)),iso(n)],all:['','']}[p]}
+function monthsBetween(a,b){const out=[];let d=new Date(a.slice(0,7)+'-01T12:00:00');const e=new Date(b.slice(0,7)+'-01T12:00:00');while(d<=e&&out.length<36){out.push(d.toISOString().slice(0,7));d=new Date(d.getFullYear(),d.getMonth()+1,1,12)}return out}
+function colChart(labels,vals,fmt,color='#11345D'){const max=Math.max(1,...vals),few=vals.length<=12,step=Math.ceil(vals.length/12);return `<div class="cols">${vals.map((v,i)=>`<div class="c" title="${esc(labels[i])}: ${esc(fmt(v))}"><span class="cv">${few&&v?esc(fmt(v)):''}</span><span class="cb"><i style="height:${(v/max*100).toFixed(1)}%;background:${color}"></i></span><span class="cl">${i%step===0?esc(labels[i]):''}</span></div>`).join('')}</div>`}
+function hbars(items,fmt){const max=Math.max(1,...items.map(i=>i.v));return items.length?`<div class="hbar">${items.map(i=>`<div class="r"><span title="${esc(i.l)}">${esc(i.l)}</span><span class="t"><i style="width:${(i.v/max*100).toFixed(1)}%;background:${esc(i.c||'#11345D')}"></i></span><span class="v">${esc(fmt(i.v))}</span></div>`).join('')}</div>`:'<div class="empty" style="padding:20px">Nothing yet.</div>'}
+function reports(){
+  const st=UI.reports||(UI.reports={p:'12',co:''});
+  const [from,to]=range(st.p);const inR=d=>(!from||d10(d)>=from)&&(!to||d10(d)<=to);
+  const O=DB.orders.filter(o=>inR(o.date)&&(!st.co||o.company===st.co)),live=O.filter(o=>!['Cancelled','Refunded'].includes(o.status));
+  const Tk=DB.tickets.filter(t=>inR(t.createdAt)&&(!st.co||t.company===st.co));
+  const rev=live.reduce((a,o)=>a+num(o.amount),0);
+  const res=Tk.filter(t=>t.resolvedAt),avg=res.length?res.reduce((a,t)=>a+(new Date(t.resolvedAt)-new Date(t.createdAt)),0)/res.length/36e5:0;
+  const hrs=h=>!h?'—':h<48?Math.round(h)+' h':(h/24).toFixed(1)+' days';
+  const fr=Tk.filter(t=>t.firstResponseAt),frAvg=fr.length?fr.reduce((a,t)=>a+(new Date(t.firstResponseAt)-new Date(t.createdAt)),0)/fr.length/36e5:0;
+  const dates=[...O.map(o=>d10(o.date)),...Tk.map(t=>d10(t.createdAt))].filter(Boolean).sort();
+  const months=monthsBetween(from||dates[0]||today(),to||today());
+  const by=(arr,key,val)=>{const m=new Map();for(const r of arr){const k=r[key]||'Other';m.set(k,(m.get(k)||0)+val(r))}return [...m].map(([l,v])=>({l,v})).sort((a,b)=>b.v-a.v)};
+  const rows=(st.co?[st.co]:COMPANIES()).map(c=>{const o=live.filter(x=>x.company===c),t=Tk.filter(x=>x.company===c),r=t.filter(x=>x.resolvedAt);return {c,orders:o.length,rev:o.reduce((a,x)=>a+num(x.amount),0),tickets:t.length,open:t.filter(x=>!T_DONE.includes(x.status)).length,res:r.length?r.reduce((a,x)=>a+(new Date(x.resolvedAt)-new Date(x.createdAt)),0)/r.length/36e5:0}}).filter(x=>x.orders||x.tickets||st.co);
+  q('#view').innerHTML=head('Builds itself from orders and website messages','Reports',`<button class="btn" data-print>Print</button><button class="btn" data-export>Export</button>`)+`
+  <div class="tools">${chips('p',[['month','This month'],['90','90 days'],['12','12 months'],['all','All time']],st.p)}${coSelect(st.co)}</div>
+  <div class="kpis">
+    <div class="kpi"><span>Revenue</span><b>${money(rev)}</b><small>${live.length} orders</small></div>
+    <div class="kpi"><span>Average order</span><b>${money(live.length?rev/live.length:0)}</b><small>${O.length-live.length} cancelled or refunded</small></div>
+    <div class="kpi"><span>Support tickets</span><b>${Tk.length}</b><small>${Tk.filter(t=>!T_DONE.includes(t.status)).length} still open</small></div>
+    <div class="kpi"><span>Time to resolve</span><b>${hrs(avg)}</b><small>first reply ${hrs(frAvg)}</small></div>
+  </div>
+  <div class="stack">
+    <div class="card"><h2>Revenue by month</h2>${colChart(months.map(monthLabel),months.map(m=>live.filter(o=>monthKey(o.date)===m).reduce((a,o)=>a+num(o.amount),0)),v=>money(v,0))}</div>
+    <div class="grid2">
+      <div class="card"><h2>Revenue by company</h2>${hbars(by(live,'company',o=>num(o.amount)).map(x=>({...x,c:coColor(x.l)})),v=>money(v,0))}</div>
+      <div class="card"><h2>What customers contact us about</h2>${hbars(by(Tk,'category',()=>1),String)}</div>
+    </div>
+    <div class="card"><h2>By company</h2><div class="scroll"><table class="tbl"><thead><tr><th>Company</th><th class="n">Orders</th><th class="n">Revenue</th><th class="n">Tickets</th><th class="n">Open</th><th class="n">Time to resolve</th></tr></thead><tbody>${rows.map(x=>`<tr><td>${coTag(x.c)}</td><td class="n">${int(x.orders)}</td><td class="n">${money(x.rev,0)}</td><td class="n">${x.tickets}</td><td class="n">${x.open}</td><td class="n">${hrs(x.res)}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">No activity in this period yet.</td></tr>'}</tbody></table></div></div>
+  </div>`;
+  q('[data-print]').onclick=()=>print();
+  q('[data-export]').onclick=()=>download('report-'+today()+'.csv',toCSV(rows,[['c','Company'],['orders','Orders'],[r=>r.rev.toFixed(2),'Revenue'],['tickets','Tickets'],['open','Open'],[r=>r.res?(r.res/24).toFixed(2):'','Days to resolve']]));
+  wire(st,reports);
+}
+
+/* ---------- tasks ---------- */
+function tasks(){
+  const st=UI.tasks||(UI.tasks={who:'all'});
+  const list=DB.tasks.filter(t=>st.who==='all'||(t.assignee||'').toLowerCase()===ME);
+  const col=s=>list.filter(t=>t.status===s).sort((a,b)=>(a.due||'9')<(b.due||'9')?-1:1);
+  const card=t=>`<button class="tcard" data-open="tasks:${t.id}"><b>${esc(t.title)}</b><span class="meta">${t.due?`<span class="${t.status!=='Done'&&t.due<today()?'late':''}">${fmtDate(t.due)}</span>`:''}${t.company?coTag(t.company):''}<span>${esc((t.assignee||'').split('@')[0])}</span></span></button>`;
+  q('#view').innerHTML=head('Follow-ups for the team','Tasks',`<button class="btn pri" data-new>+ Task</button>`)+`
+  <div class="tools">${chips('who',[['all','Everyone'],['me','Mine']],st.who)}</div>
+  <div class="board">${K_STATUS.map(s=>{const c=col(s);return `<div class="col"><h3>${s}<span>${c.length}</span></h3>${(s==='Done'?c.slice(0,10):c).map(card).join('')||'<p style="margin:6px;font-size:13px;color:var(--muted)">Nothing here.</p>'}</div>`}).join('')}</div>`;
+  q('[data-new]').onclick=()=>editRecord('tasks');
+  wire(st,tasks);
+}
+
+/* ---------- contacts ---------- */
+function contacts(){
+  const st=UI.contacts||(UI.contacts={type:'',q:''});
+  const list=DB.contacts.filter(c=>(!st.type||c.type===st.type)&&has(c,(st.q||'').toLowerCase(),['name','organization','email','phone'])).sort((a,b)=>String(b.lastContactAt||b.createdAt).localeCompare(String(a.lastContactAt||a.createdAt)));
+  const cols='grid-template-columns:minmax(0,1.5fr) minmax(0,1.6fr) 120px minmax(0,1fr)';
+  q('#view').innerHTML=head('Added by themselves when someone writes in or signs up','Contacts',`<button class="btn" data-export>Export</button><button class="btn" data-new>+ Add</button>`)+`
+  <div class="tools"><select data-f="type" aria-label="Type"><option value="">Everyone</option>${C_TYPE.map(p=>`<option${p===st.type?' selected':''}>${p}</option>`).join('')}</select><input type="search" data-f="q" value="${esc(st.q)}" placeholder="Search"></div>
+  <div class="rows"><div class="row hd" style="${cols}"><span>Name</span><span class="xs">Email</span><span>Type</span><span class="xs">Last in touch</span></div>
+  ${list.map(c=>`<button class="row" style="${cols}" data-open="contacts:${c.id}"><span><b>${esc(c.name)}</b><small>${esc(c.organization||c.company||'')}</small></span><span class="xs m" style="overflow:hidden;text-overflow:ellipsis">${esc(c.email||'')}</span><span><span class="pill">${esc(c.type||'Contact')}</span></span><span class="xs m">${ago(c.lastContactAt||c.createdAt)}</span></button>`).join('')||(DB.contacts.length?'<div class="empty">No one matches.</div>':EMPTY_IN_())}</div>`;
+  q('[data-new]').onclick=()=>editRecord('contacts');qa('[data-import]').forEach(b=>b.onclick=importForms);
+  q('[data-export]').onclick=()=>download('contacts-'+today()+'.csv',toCSV(list,[['name','Name'],['email','Email'],['phone','Phone'],['organization','Organization'],['type','Type'],['company','Related to']]));
+  wire(st,contacts);
+}
+
+/* ---------- team (admin) ---------- */
+let TEAM=null,REQS=null,teamErr='';
+const teamCall=(method,body)=>call('/.netlify/functions/team',method,body);
+async function team(){
+  const draw=()=>{
+    const cols='grid-template-columns:minmax(0,2fr) 100px 130px minmax(0,1.7fr)';
+    q('#view').innerHTML=head('Who can sign in','Team',`<button class="btn pri" data-invite>+ Invite</button>`)+(teamErr?`<div class="banner err">${esc(teamErr)}</div>`:'')+
+    (REQS&&REQS.length?`<div class="card" style="margin-bottom:18px"><h2>Access requests</h2><div class="list">${REQS.map(r=>`<div class="row" style="cursor:default"><span><b>${esc(r.name)} · ${esc(r.email)}</b><small>${esc(r.reason)}</small></span><span style="display:flex;gap:6px"><button class="btn sm pri" data-acc="${esc(r.id)}">Accept</button><button class="btn sm" data-dec="${esc(r.id)}">Decline</button></span></div>`).join('')}</div></div>`:'')+
+    (TEAM==null?'<div class="loading">Loading…</div>':`<div class="rows"><div class="row hd" style="${cols}"><span>Person</span><span>Status</span><span class="xs">Role</span><span class="xs"></span></div>${TEAM.map(u=>`<div class="row" style="${cols};cursor:default"><span><b>${esc(u.name||u.email)}${u.me?' (you)':''}</b><small>${esc(u.email)} · ${u.lastSignIn?'signed in '+ago(u.lastSignIn):'never signed in'}</small></span><span>${pill(u.status)}</span><span class="xs">${u.me?'Admin':`<select data-role="${esc(u.id)}" style="min-height:34px;border-radius:999px;border:1.5px solid var(--input);padding:0 10px;font:inherit"><option value="member"${u.roles.includes('logo-admin')?'':' selected'}>Member</option><option value="admin"${u.roles.includes('logo-admin')?' selected':''}>Admin</option></select>`}</span><span class="xs" style="display:flex;gap:6px;justify-content:flex-end">${u.status==='Active'?`<button class="btn sm" data-reset="${esc(u.email)}">Reset password</button>`:`<button class="btn sm" data-reinvite="${esc(u.email)}">Re-send invite</button>`}${u.me?'':`<button class="btn sm danger" data-remove="${esc(u.id)}" data-email="${esc(u.email)}">Remove</button>`}</span></div>`).join('')}</div>`);
+    q('[data-invite]').onclick=()=>{openDrawer('Invite someone','They’ll get an email to create a password.',`<form class="form" novalidate><label class="f full"><span>Email</span><input id="invE" type="email" placeholder="name@company.com"></label></form><p class="msg" id="invM"></p>`,`<span class="sp"></span><button class="btn" type="button" data-close>Cancel</button><button class="btn pri" type="button" id="invGo">Send invite</button>`);q('[data-close]').onclick=closeDrawer;q('#invGo').onclick=async()=>{const e=q('#invE').value.trim();if(!/^\S+@\S+\.\S+$/.test(e)){q('#invM').textContent='Enter a valid email.';return}q('#invGo').disabled=true;try{await teamCall('POST',{action:'invite',email:e});closeDrawer();toast('Invite sent');TEAM=null;team()}catch(err){q('#invM').textContent=err.message;q('#invGo').disabled=false}}};
+    qa('[data-role]').forEach(s=>s.onchange=async()=>{try{await teamCall('POST',{action:'role',id:s.dataset.role,role:s.value});toast('Role updated')}catch(e){toast(e.message)}});
+    qa('[data-reset]').forEach(b=>b.onclick=async()=>{b.disabled=true;try{await teamCall('POST',{action:'reset',email:b.dataset.reset});toast('Reset email sent')}catch(e){toast(e.message)}b.disabled=false});
+    qa('[data-reinvite]').forEach(b=>b.onclick=async()=>{b.disabled=true;try{await teamCall('POST',{action:'invite',email:b.dataset.reinvite});toast('Invite re-sent')}catch(e){toast(e.message)}b.disabled=false});
+    qa('[data-remove]').forEach(b=>b.onclick=async()=>{if(!confirm('Remove '+b.dataset.email+'?'))return;try{await teamCall('POST',{action:'remove',id:b.dataset.remove});TEAM=null;team()}catch(e){toast(e.message)}});
+    const review=async(action,id,b)=>{b.disabled=true;try{await call('/.netlify/functions/access-review','POST',{action,id});toast(action==='approve'?'Accepted – invite sent':'Declined');REQS=null;TEAM=null;team()}catch(e){toast(e.message);b.disabled=false}};
+    qa('[data-acc]').forEach(b=>b.onclick=()=>review('approve',b.dataset.acc,b));qa('[data-dec]').forEach(b=>b.onclick=()=>review('decline',b.dataset.dec,b));
+  };
+  draw();
+  if(TEAM==null){try{TEAM=await teamCall('GET');teamErr=''}catch(e){TEAM=[];teamErr='Couldn’t load accounts: '+e.message}
+    try{REQS=await call('/.netlify/functions/access-requests')}catch(e){REQS=[]}
+    q('#nTeam').textContent=REQS?.length||'';if(viewName()==='team')draw()}
+}
+
+/* ---------- settings (admin) ---------- */
+function settings(){
+  const s=S();let cos=s.companies.map(c=>({...c}));
+  const m=CONN?.mail||{},a=CONN?.amazon||{};
+  const icon={mail:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',web:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>',box:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg>',mill:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-5 7 5v12"/></svg>'};
+  const last=x=>x?.at?(x.ok===false?`<span class="dot bad"></span>${esc(x.error||'Error')}`:`<span class="dot ok"></span>Checked ${ago(x.at)}`):'';
+  const draw=()=>{q('#view').innerHTML=head('Connections and company setup','Settings','')+`
+  <div class="stack">
+  <div class="card"><h2>Connections</h2>
+    <div class="conn"><span class="ic b">${icon.mail}</span><span class="tx"><b>iCloud Mail</b>${m.connected?`<small>Replies send from: ${(m.senders||[]).map(x=>esc(x.address)).join(', ')}</small><small>Only used to send. Your inbox isn\u2019t read.</small>`:`<small>Used only to send your replies from your own addresses. Your inbox isn\u2019t read.</small>`}</span>${m.connected?`<span style="display:flex;gap:6px"><button class="btn sm" id="mailFrom">Addresses</button><button class="btn sm danger" id="mailOff">Disconnect</button></span>`:`<button class="btn sm pri" id="mailOn">Connect</button>`}</div>
+    <div class="conn"><span class="ic g">${icon.web}</span><span class="tx"><b>Website forms</b><small>New contact-form messages become tickets and sign-ups are counted. Always on.</small><small>${CONN?.forms?.last?.at?'<span class="dot ok"></span>Past messages imported '+ago(CONN.forms.last.at):'Past messages not imported yet.'}</small></span><button class="btn sm" data-import>Import past</button></div>
+    <div class="conn"><span class="ic o">${icon.box}</span><span class="tx"><b>Amazon Seller Central</b><small>${a.configured?'Orders update about once an hour.':'Ready for launch – orders flow in by themselves once your Amazon keys are added.'}</small><small>${last(a.last)}</small></span>${a.configured?'<span class="pill green">On</span>':'<span class="pill">Not yet</span>'}</div>
+    <div class="conn"><span class="ic gr">${icon.mill}</span><span class="tx"><b>Northfield Mills portal</b><small>Coming next – needs the Mills site’s server files.</small></span><span class="pill">Not yet</span></div>
+  </div>
+  <div class="grid2">
+  <div class="card"><h2>Companies</h2><p class="hint">Messages that mention a keyword are filed under that company automatically.</p><div>${cos.map((c,i)=>`<div class="co-row"><input type="color" value="${esc(c.color)}" data-ci="${i}" aria-label="Colour"><input type="text" value="${esc(c.name)}" data-cn="${i}" aria-label="Name"><input class="kw" type="text" value="${esc(c.keywords||'')}" data-ck="${i}" placeholder="keywords, comma separated" aria-label="Keywords"><button class="btn sm danger" data-cd="${i}" type="button" aria-label="Remove">×</button></div>`).join('')}</div><button class="btn sm" id="coAdd" type="button">+ Company</button></div>
+  <div class="card"><h2>Automation</h2><div class="form" style="background:var(--bg)">
+    <label class="f full"><span>Weekly summary email goes to</span><input id="sRec" type="text" value="${esc(s.reportRecipients||'')}" placeholder="you@company.com, partner@company.com"></label>
+    <label class="f"><span>Close tickets waiting on the customer after</span><select id="sClose">${[[0,'Never'],[3,'3 days'],[7,'7 days'],[14,'14 days']].map(([v,l])=>`<option value="${v}"${+s.autoCloseDays===v?' selected':''}>${l}</option>`).join('')}</select></label>
+    <label class="f"><span>Amazon orders belong to</span><select id="sAmz">${COMPANIES().map(c=>`<option${c===s.amazonCompany?' selected':''}>${esc(c)}</option>`).join('')}</select></label>
+    <label class="f full"><span>Email signature</span><textarea id="sSig" placeholder="Northfield Enterprise Support">${esc(s.signature||'')}</textarea></label>
+  </div></div>
+  </div>
+  <div><button class="btn pri" id="sSave" type="button">Save settings</button></div>
+  </div>`;
+  qa('[data-ci]').forEach(el=>el.oninput=()=>cos[el.dataset.ci].color=el.value);
+  qa('[data-cn]').forEach(el=>el.oninput=()=>cos[el.dataset.cn].name=el.value);
+  qa('[data-ck]').forEach(el=>el.oninput=()=>cos[el.dataset.ck].keywords=el.value);
+  qa('[data-cd]').forEach(el=>el.onclick=()=>{cos.splice(+el.dataset.cd,1);draw()});
+  q('#coAdd').onclick=()=>{cos.push({name:'',color:'#64708A',keywords:''});draw()};
+  q('#sSave').onclick=async()=>{const b=q('#sSave');b.disabled=true;try{await save('settings',DB.settings[0],{companies:cos.map(c=>({name:c.name.trim(),color:c.color,keywords:(c.keywords||'').trim()})).filter(c=>c.name),reportRecipients:q('#sRec').value.trim(),autoCloseDays:+q('#sClose').value,amazonCompany:q('#sAmz').value,signature:q('#sSig').value.trim()});toast('Settings saved')}catch(e){toast(e.message)}b.disabled=false};
+  if(q('#mailOn'))q('#mailOn').onclick=connectMail;
+  if(q('#mailFrom'))q('#mailFrom').onclick=()=>sendersSheet(m.senders||[]);
+  qa('[data-import]').forEach(b=>b.onclick=importForms);
+  if(q('#mailOff'))q('#mailOff').onclick=async()=>{if(!confirm('Disconnect iCloud Mail? You won\u2019t be able to email customers from the portal.'))return;try{await conn('disconnect-mail','POST',{});await loadAll();settings()}catch(e){toast(e.message)}};
+  wireSync();
+  };draw();
+}
+function senderRows(list){return (list.length?list:[{address:'',name:''},{address:'',name:''}]).map((x,i)=>`<div class="f sender" style="grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto"><input data-sa value="${esc(x.address)}" type="email" placeholder="${i?'support@northfieldenterprise.com':'eli@northfieldenterprise.com'}" style="text-align:left"><input data-sn value="${esc(x.name)}" type="text" placeholder="${i?'Northfield Enterprise Support':'Eli'}" style="text-align:left"><button type="button" class="x" data-sx aria-label="Remove" style="width:26px;height:26px">×</button></div>`).join('')}
+function readSenders(){return qa('.sender').map(r=>({address:r.querySelector('[data-sa]').value.trim().toLowerCase(),name:r.querySelector('[data-sn]').value.trim()})).filter(x=>/^\S+@\S+\.\S+$/.test(x.address))}
+function wireSenders(){const wireX=()=>qa('[data-sx]').forEach(b=>b.onclick=()=>{if(qa('.sender').length>1)b.closest('.sender').remove()});q('#addSender').onclick=()=>{q('#senders').insertAdjacentHTML('beforeend',senderRows([{address:'',name:''}]).split('</div>')[0]+'</div>');wireX()};wireX()}
+const SENDERS_HTML=list=>`<p style="margin:18px 4px 6px;font:600 13px var(--font);color:var(--sec);text-transform:uppercase;letter-spacing:.03em">Send from</p><div class="form" id="senders">${senderRows(list)}</div><button type="button" class="btn sm" id="addSender" style="margin-top:10px">+ Add address</button><p class="hint">Any address on your iCloud Mail account, like your own and a support address. You pick which one when you reply. The first is the default.</p>`;
+function connectMail(){
+  openDrawer('Connect iCloud Mail','Only used to send your replies. Your inbox isn’t read.',`
+  <ol class="steps">
+    <li>Find your <b>@icloud.com</b> address: on iPhone, Settings → your name → iCloud → iCloud Mail. Custom-domain addresses can’t sign in, but you can send from them.</li>
+    <li>At <a href="https://account.apple.com" target="_blank" rel="noopener">account.apple.com</a> → Sign-In and Security → App-Specific Passwords, create one called “NE Portal”.</li></ol>
+  <div class="form">
+    <label class="f"><span>iCloud address</span><input id="mUser" type="email" placeholder="you@icloud.com"></label>
+    <label class="f"><span>App password</span><input id="mPass" type="password" placeholder="xxxx-xxxx-xxxx-xxxx" autocomplete="off"></label>
+  </div>${SENDERS_HTML([])}<p class="msg" id="mMsg"></p>`,
+  `<span class="sp"></span><button class="btn" type="button" data-close>Cancel</button><button class="btn pri" type="button" id="mGo">Connect</button>`);
+  q('[data-close]').onclick=closeDrawer;wireSenders();
+  q('#mGo').onclick=async()=>{const b=q('#mGo');const u=q('#mUser').value.trim().toLowerCase();q('#mMsg').textContent='';
+    if(!/@(icloud|me|mac)\.com$/.test(u)){q('#mMsg').textContent='Use your @icloud.com address to sign in. Put eli@ or support@ under “Send from”.';return}
+    b.disabled=true;b.textContent='Checking…';
+    try{await conn('connect-mail','POST',{user:u,pass:q('#mPass').value,senders:readSenders()});closeDrawer();toast('iCloud Mail connected');await loadAll();render(true)}
+    catch(e){q('#mMsg').textContent=e.message;b.disabled=false;b.textContent='Connect'}};
+}
+function sendersSheet(list){
+  openDrawer('Send-from addresses','Pick between these when you reply.',SENDERS_HTML(list)+'<p class="msg" id="sMsg"></p>',`<span class="sp"></span><button class="btn" type="button" data-close>Cancel</button><button class="btn pri" type="button" id="sGo">Save</button>`);
+  q('[data-close]').onclick=closeDrawer;wireSenders();
+  q('#sGo').onclick=async()=>{try{await conn('senders','POST',{senders:readSenders()});closeDrawer();toast('Saved');await loadAll();render(true)}catch(e){q('#sMsg').textContent=e.message}};
+}
+
+/* ---------- import past Netlify form submissions ---------- */
+function importForms(){
+  const needToken=!CONN?.forms?.tokenSaved;
+  openDrawer('Import past website messages','Contact-form messages become tickets. Sign-ups are counted. Nothing is imported twice.',
+  `${needToken?`<ol class="steps"><li>Open <a href="https://app.netlify.com/user/applications#personal-access-tokens" target="_blank" rel="noopener">Netlify → User settings → Applications</a>.</li><li>Under <b>Personal access tokens</b>, click <b>New access token</b>. Name it “NE Portal”.</li><li>Copy the token and paste it below.</li></ol>
+  <div class="form"><label class="f full"><span>Netlify access token</span><input id="nfTok" type="password" autocomplete="off" placeholder="Paste token"></label></div>`:'<p style="margin:0 4px 6px;color:var(--sec)">Ready to import.</p>'}
+  <div class="progress hide" id="impBar"><i></i></div><p id="impLog" style="margin:12px 4px 0;font-size:14px;color:var(--sec)"></p><p class="msg" id="impMsg"></p>`,
+  `<span class="sp"></span><button class="btn" type="button" data-close>Cancel</button><button class="btn pri" type="button" id="impGo">Import</button>`);
+  q('[data-close]').onclick=closeDrawer;
+  q('#impGo').onclick=async()=>{
+    const b=q('#impGo');b.disabled=true;q('#impMsg').textContent='';
+    const tok=q('#nfTok')?.value.trim();
+    if(needToken&&!tok){q('#impMsg').textContent='Paste the token first.';b.disabled=false;return}
+    try{
+      const {forms}=await conn('import-forms','POST',tok?{token:tok}:{});
+      const total=forms.reduce((a,f)=>a+f.count,0)||1;let doneN=0;const sum={ticket:0,signup:0,dup:0};
+      q('#impBar').classList.remove('hide');
+      for(const f of forms){for(let page=1;page<60;page++){
+        q('#impLog').textContent=`Importing “${f.name}”…`;
+        const r=await conn('import-forms','POST',{formId:f.id,formName:f.name,page});
+        for(const k in r.counts){sum[k]=(sum[k]||0)+r.counts[k];doneN+=r.counts[k]}
+        q('#impBar i').style.width=Math.min(100,doneN/total*100)+'%';
+        if(r.done)break;
+      }}
+      q('#impBar i').style.width='100%';
+      q('#impLog').textContent=`Done – ${sum.ticket} message${sum.ticket===1?'':'s'} and ${sum.signup} sign-up${sum.signup===1?'':'s'} added${sum.dup?`, ${sum.dup} already here`:''}.`;
+      b.textContent='Done';b.onclick=closeDrawer;b.disabled=false;
+      await loadAll();render(true);
+    }catch(e){q('#impMsg').textContent=e.message;b.disabled=false;if(/token/i.test(e.message)&&CONN?.forms)CONN.forms.tokenSaved=false}
+  };
+}
+
+/* ---------- start ---------- */
+await loadAll();render();
+if(CONN?.mail?.connected)loadMail();
+if(ADMIN)call('/.netlify/functions/access-requests').then(r=>{REQS=r;q('#nTeam').textContent=r.length||''}).catch(()=>{});
+setInterval(async()=>{if(document.visibilityState==='visible'&&!q('#drawer').classList.contains('open')&&!document.activeElement?.matches('input,textarea,select')){await loadAll();render(true)}},60000);
+</script>
+<script src="/assets/pw-toggle.js" defer></script>
+</body></html>
